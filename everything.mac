@@ -86,8 +86,13 @@ $g_option = "-p -s -n 200";
 
 
 /*****************************************************************************
-		処理
+		メイン処理
 *****************************************************************************/
+$g_ini_filename=currentmacrofilename+".config.ini";
+$g_ini_dialog_section="dialog";
+$g_ini_dialog_key="input";
+
+
 call Main;
 endmacro;
 
@@ -120,7 +125,12 @@ InputFromText:
 	return $$search_words;
 
 InputFromBox:
-	return input("検索するファイル名を入力して下さい。(*.txt)");
+	$$prev_input = getinistr($g_ini_filename,$g_ini_dialog_section,$g_ini_dialog_key);
+	$$current_input = input("検索するファイル名を入力して下さい。(*.txt)",$$prev_input);
+	if($$current_input!= ""){
+		writeinistr $g_ini_filename,$g_ini_dialog_section,$g_ini_dialog_key,$$current_input;
+	}
+	return $$current_input;
 
 ConvertOutputMode:
 	if(#g_output_mode==0){
