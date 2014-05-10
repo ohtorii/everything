@@ -18,6 +18,10 @@
  * カーソルのある行の文字
 
 
+###より詳細な情報
+マクロ冒頭のコメントを参照して下さい。
+
+
 ###スクリーンショット（検索文字の指定に入力ボックスを使用する）
 - ![Everything hidemaru](http://f.st-hatena.com/images/fotolife/o/ohtorii/20140510/20140510142554.png "Everything 秀丸エディター")
 
@@ -25,4 +29,8 @@
 - ![Everything hidemaru](http://f.st-hatena.com/images/fotolife/o/ohtorii/20140510/20140510142553.png "Everything 秀丸エディター")
 
 
-
+###リンク
+* EverythingのWEBページ
+ * http://www.voidtools.com/
+* Everything日本語ヘルプ
+ * https://sites.google.com/site/everythingjphelp/

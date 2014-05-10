@@ -2,9 +2,20 @@
 
 超高速なファイル検索ソフトである「Everything」を使用してファイルを検索します。
 
-検索結果は「アウトプット枠／新規ファイルへ出力／カーソル位置へ挿入」から選択可能
-です、好みに合わせて本マクロをカスタマイズして下さい。
-カスタマイズについては後述を参照して下さい。
+
+以下２点についてカスタマイズが可能です。
+
+＊検索結果の表示方法
+  アウトプット枠
+  新規ファイルへ出力
+  カーソル位置へ挿入
+
+＊検索文字列の指定
+  入力ボックス
+  カーソルのある行の文字
+  
+好みに合わせて本マクロをカスタマイズして下さい。
+なお、カスタマイズについては後述を参照して下さい。
 
 
 （前準備）
@@ -15,11 +26,6 @@
 ・es.exeをダウンロードして適切なフォルダへコピーして下さい。
     (例)C:\Program Files\Everything\es.exe
 ・本マクロ中の$g_exe変数（es.exeへのパス）を必要に応じて書き換えて下さい。
-
-（）
-
-
-（カスタマイズ）
 
 
 （動作確認を行った環境）
@@ -57,13 +63,13 @@ $g_option = "-p -s -n 200";
 /*****************************************************************************
         設定（オプション）
 *****************************************************************************/
-/*動作モード
+/*検索文字列の指定モード
 0 - 選択している文字を使用する。（選択が無ければカーソルのある行の文字を使用する。）
 1 - 入力BOX
 */
-#g_input_mode=0;
+#g_input_mode=1;
 
-/*出力モード
+/*検索結果の出力モード
 0 - アウトプット枠
 1 - 新規ファイルへ出力
 2 - カーソル位置へ挿入
@@ -108,13 +114,13 @@ InputFromText:
 		##old_x=x;
 		##old_y=y;
 		selectline;
-		$$search_words = gettext2(seltopcolumn,seltoplineno,selendcolumn,selendlineno,1);
+		$$search_words = gettext2(seltopcolumn,seltoplineno,selendcolumn,selendlineno,0);
 		moveto  ##old_x, ##old_y;
 	}
 	return $$search_words;
 
 InputFromBox:
-	return input("検索するファイル名を入力して下さい。");
+	return input("検索するファイル名を入力して下さい。(*.txt)");
 
 ConvertOutputMode:
 	if(#g_output_mode==0){
@@ -140,16 +146,23 @@ CheckEnvironment:
 	return true;
 
 GetSearchText:
+	$$result="";
 	if(#g_input_mode==0){
 		call InputFromText;
-		return $$return;
+		$$result=$$return;
 	}else if(#g_input_mode==1){
 		call InputFromBox;
-		return $$return;
+		$$result=$$return;
 	}else{
-		//pass
+		return "";
 	}
-	return "";
+	if($$result==""){
+		return "";
+	}
+	
+	call TrimString $$result;
+	$$result=$$return;
+	return $$result;
 
 RunEverything:
 	##output_mode=##1;
@@ -169,3 +182,17 @@ RunEverything:
 			0 			//unicode 0:ansi 2:unicode
 			;
 	return result;
+
+TrimString:
+	$$space="\r\n\t 　";//空白文字を定義
+	while(1){
+	  ##word=strlen($$1);
+	  //文字列の先頭に空白文字がある場合、空白文字を削除
+	  if(strstr($$space,leftstr($$1,2))!=-1)$$1=rightstr($$1,##word-2);
+	  else if(strstr($$space,rightstr($$1,2))!=-1)$$1=leftstr($$1,##word-2);
+	  //ここまで全角文字の対処
+	  else if(strstr($$space,leftstr($$1,1))!=-1)$$1=rightstr($$1,##word-1);
+	  else if(strstr($$space,rightstr($$1,1))!=-1)$$1=leftstr($$1,##word-1);
+	  else break;
+	}
+	return $$1;
