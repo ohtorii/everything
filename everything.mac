@@ -1,135 +1,197 @@
-/* GŠÛƒGƒfƒBƒ^‚©‚çEverything‚ğg—p‚·‚éƒ}ƒNƒB
+ï»¿/* ç§€ä¸¸ã‚¨ãƒ‡ã‚£ã‚¿ã‹ã‚‰Everythingã‚’ä½¿ç”¨ã™ã‚‹ãƒã‚¯ãƒ­ã€‚
 
 -----------------------------------------
-ŠT—v
+æ¦‚è¦
 -----------------------------------------
-GŠÛƒGƒfƒBƒ^‚©‚çƒtƒ@ƒCƒ‹ŒŸõƒ\ƒtƒg‚ÌuEverythingv‚ğg—p‚µ‚Äƒtƒ@ƒCƒ‹‚ğŒŸõ‚µ‚Ü‚·B
-GŠÛƒGƒfƒBƒ^‚Ì’†‚©‚çˆêu‚½‚è‚Æ‚à”²‚¯‚½‚­‚È‚¢•ûŒü‚¯‚Ìƒ}ƒNƒ‚Å‚·B
+ç§€ä¸¸ã‚¨ãƒ‡ã‚£ã‚¿ã‹ã‚‰ãƒ•ã‚¡ã‚¤ãƒ«æ¤œç´¢ã‚½ãƒ•ãƒˆã®ã€ŒEverythingã€ã‚’ä½¿ç”¨ã—ã¦ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ¤œç´¢ã—ã¾ã™ã€‚
+ç§€ä¸¸ã‚¨ãƒ‡ã‚£ã‚¿ã®ä¸­ã‹ã‚‰ä¸€ç¬ãŸã‚Šã¨ã‚‚æŠœã‘ãŸããªã„æ–¹å‘ã‘ã®ãƒã‚¯ãƒ­ã§ã™ã€‚
 
 
-uŒŸõ•¶š—ñ‚Ì“ü—Í•û–@EŒŸõŒ‹‰Ê‚Ì•\¦•û–@v‚Ì‚Q“_‚É‚Â‚¢‚ÄƒJƒXƒ^ƒ}ƒCƒY‚ª‰Â”\‚Å‚·B
+ã€Œæ¤œç´¢æ–‡å­—åˆ—ã®å…¥åŠ›æ–¹æ³•ãƒ»æ¤œç´¢çµæœã®è¡¨ç¤ºæ–¹æ³•ã€ã®ï¼’ç‚¹ã«ã¤ã„ã¦ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚ºãŒå¯èƒ½ã§ã™ã€‚
 
-	–ŒŸõŒ‹‰Ê‚Ì•\¦•û–@
-	  ƒAƒEƒgƒvƒbƒg˜g
-	  V‹Kƒtƒ@ƒCƒ‹‚Öo—Í
-	  ƒJ[ƒ\ƒ‹ˆÊ’u‚Ö‘}“ü
+	ï¼Šæ¤œç´¢çµæœã®è¡¨ç¤ºæ–¹æ³•
+	  ã‚¢ã‚¦ãƒˆãƒ—ãƒƒãƒˆæ 
+	  æ–°è¦ãƒ•ã‚¡ã‚¤ãƒ«ã¸å‡ºåŠ›
+	  ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ã¸æŒ¿å…¥
 
-	–ŒŸõ•¶š—ñ‚Ìw’è
-	  “ü—Íƒ{ƒbƒNƒX
-	  ƒJ[ƒ\ƒ‹‚Ì‚ ‚és‚Ì•¶š
+	ï¼Šæ¤œç´¢æ–‡å­—åˆ—ã®æŒ‡å®š
+	  å…¥åŠ›ãƒœãƒƒã‚¯ã‚¹
+	  ã‚«ãƒ¼ã‚½ãƒ«ã®ã‚ã‚‹è¡Œã®æ–‡å­—
 
-ƒJƒXƒ^ƒ}ƒCƒY‚É‚Â‚¢‚Ä‚ÍA–{ƒ}ƒNƒ’†‚Ìuİ’èiƒIƒvƒVƒ‡ƒ“jv‚ÌƒRƒƒ“ƒg‚ğQÆ‚µ‚Ä‰º‚³‚¢B
-
-
-
-----------------------------------------
-ƒCƒ“ƒXƒg[ƒ‹•û–@
-----------------------------------------
-En‚ß‚ÉAEverything ‚ğƒCƒ“ƒXƒg[ƒ‹‚µ‚Ü‚·B
-EŸ‚ÉAes.zip ‚ğƒ_ƒEƒ“ƒ[ƒh‚µ‚Ä zipƒtƒ@ƒCƒ‹’†‚Ì es.exe ‚ğ“KØ‚ÈƒtƒHƒ‹ƒ_‚ÖƒRƒs[‚µ‚Ä‰º‚³‚¢B
-    (—á)C:\Program Files\Everything\es.exe
-E–{ƒ}ƒNƒ’†‚Ì$g_exe•Ï”ies.exe‚Ö‚ÌƒpƒXj‚ğ•K—v‚É‰‚¶‚Ä‘‚«Š·‚¦‚Ä‰º‚³‚¢B
-
-i’ˆÓj
-E—\‚ßAEverything ‚ª³í“®ì‚·‚é‚±‚Æ‚ğŠm”F‚µ‚Ä‰º‚³‚¢B
+ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚ºã«ã¤ã„ã¦ã¯ã€æœ¬ãƒã‚¯ãƒ­ä¸­ã®ã€Œè¨­å®šï¼ˆã‚ªãƒ—ã‚·ãƒ§ãƒ³ï¼‰ã€ã®ã‚³ãƒ¡ãƒ³ãƒˆã‚’å‚ç…§ã—ã¦ä¸‹ã•ã„ã€‚
 
 
 
 ----------------------------------------
-“®ìŠm”F‚ğs‚Á‚½ŠÂ‹«
+ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«æ–¹æ³•
 ----------------------------------------
-GŠÛƒGƒfƒBƒ^ v8.40 beta19 32bit
+ãƒ»å§‹ã‚ã«ã€Everything ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¾ã™ã€‚
+ãƒ»æ¬¡ã«ã€es.zip ã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã—ã¦ zipãƒ•ã‚¡ã‚¤ãƒ«ä¸­ã® es.exe ã‚’é©åˆ‡ãªãƒ•ã‚©ãƒ«ãƒ€ã¸ã‚³ãƒ”ãƒ¼ã—ã¦ä¸‹ã•ã„ã€‚
+    (ä¾‹)C:\Program Files\Everything\es.exe
+ãƒ»æœ¬ãƒã‚¯ãƒ­ä¸­ã®$g_exeå¤‰æ•°ï¼ˆes.exeã¸ã®ãƒ‘ã‚¹ï¼‰ã‚’å¿…è¦ã«å¿œã˜ã¦æ›¸ãæ›ãˆã¦ä¸‹ã•ã„ã€‚
+
+ï¼ˆæ³¨æ„ï¼‰
+ãƒ»äºˆã‚ã€Everything ãŒæ­£å¸¸å‹•ä½œã™ã‚‹ã“ã¨ã‚’ç¢ºèªã—ã¦ä¸‹ã•ã„ã€‚
+
+
+
+----------------------------------------
+å‹•ä½œç¢ºèªã‚’è¡Œã£ãŸç’°å¢ƒ
+----------------------------------------
+ç§€ä¸¸ã‚¨ãƒ‡ã‚£ã‚¿ v8.40 beta19 32bit
 Everything-1.3.3.658b.x64.exe
 Windows7 64bit
 
 
 
 ----------------------------------------
-ƒŠƒ“ƒN
+ãƒªãƒ³ã‚¯
 ----------------------------------------
-Everything‚ÌWEBƒy[ƒW
+Everythingã®WEBãƒšãƒ¼ã‚¸
 http://www.voidtools.com/
 
-Everything“ú–{Œêƒwƒ‹ƒv
+Everythingæ—¥æœ¬èªãƒ˜ãƒ«ãƒ—
 https://sites.google.com/site/everythingjphelp/
 
 
 
 ----------------------------------------
-XV—š—ğ
+æ›´æ–°å±¥æ­´
 ----------------------------------------
-2014/09/15	ƒRƒƒ“ƒg‚Ì•ÒW
-2014/05/10	ì¬
+2018/10/08	v2.0.0
+2014/09/15	v1.0.1 ã‚³ãƒ¡ãƒ³ãƒˆã®ç·¨é›†
+2014/05/10	v1.0.0 å…¬é–‹
+
+----------------------------------------
+é€£çµ¡å…ˆ
+----------------------------------------
+http://d.hatena.ne.jp/ohtorii/
+https://twitter.com/ohtorii
 */
 
 
 
 /*****************************************************************************
-        İ’èi•K{j
+        è¨­å®šï¼ˆå¿…é ˆï¼‰
 *****************************************************************************/
-/* es.exe ‚Ö‚ÌƒpƒX
-*/
+/* es.exe ã¸ã®ãƒ‘ã‚¹ */
 $g_exe = "C:\\Program Files\\Everything\\es.exe";
 
-/*es.exe ‚ÌƒIƒvƒVƒ‡ƒ“
-Ú×‚ÍˆÈ‰ºƒRƒ}ƒ“ƒh‚ğÀs‚µ‚Ä‰º‚³‚¢B
+/*es.exe ã®ã‚ªãƒ—ã‚·ãƒ§ãƒ³
+è©³ç´°ã¯ä»¥ä¸‹ã‚³ãƒãƒ³ãƒ‰ã‚’å®Ÿè¡Œã—ã¦ä¸‹ã•ã„ã€‚
 > es.exe --help
 */
 $g_option = "-p -s -n 200";
 
 
 
-/*****************************************************************************
-        İ’èiƒIƒvƒVƒ‡ƒ“j
-*****************************************************************************/
-/*ŒŸõ•¶š—ñ‚Ìw’èƒ‚[ƒh
-0 - ‘I‘ğ‚µ‚Ä‚¢‚é•¶š‚ğg—p‚·‚éBi‘I‘ğ‚ª–³‚¯‚ê‚ÎƒJ[ƒ\ƒ‹s‚Ì•¶š‚ğg—p‚µ‚Ü‚·Bj
-1 - “ü—ÍBOX
-*/
-#g_input_mode  = 1;
-
-/*ŒŸõŒ‹‰Ê‚Ìo—Íƒ‚[ƒh
-0 - ƒAƒEƒgƒvƒbƒg˜g
-1 - V‹Kƒtƒ@ƒCƒ‹‚Öo—Í
-2 - ƒJ[ƒ\ƒ‹ˆÊ’u‚Ö‘}“ü
-*/
-#g_output_mode = 0;
-
-
-
-
-
-
-
-
 
 
 /*****************************************************************************
-		ƒƒCƒ“ˆ—
+		ãƒ¡ã‚¤ãƒ³å‡¦ç†
 *****************************************************************************/
+//ãƒãƒ¼ã‚¸ãƒ§ãƒ³ç•ªå·
+$g_version = "version 2.0.0(2018/10/08)";
+$dengaku_dll = hidemarudir + "\\DengakuDLL.dll";
+//ç©ºç™½æ–‡å­—ã®å®šç¾©
+$g_space="\r\n\t ã€€";
+//ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®è¨­å®šã‚’ä¿å­˜ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«å
 $g_ini_filename=currentmacrofilename+".config.ini";
 $g_ini_dialog_section="dialog";
 $g_ini_dialog_key="input";
+
+//
+//ãƒ€ã‚¤ã‚¢ãƒ­ã‚°é–¢ä¿‚
+//
+//ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã«å…¥åŠ›ã•ã‚ŒãŸæ¤œç´¢ãƒ‘ã‚¿ãƒ¼ãƒ³
+$g_search_pattern="";
+//ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®é€šçŸ¥ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+$g_notify_close="10";
+
 
 
 call Main;
 endmacro;
 
 Main:
+	setcompatiblemode 0x20000;
 	call CheckEnvironment;
 	if(! ##return){
 		return false;
 	}
-	call GetSearchText;
-	if($$return==""){
-		return ;
+	loaddll $dengaku_dll;
+	if (!result) {
+		message "ç”°æ¥½DLLã®ãƒ­ãƒ¼ãƒ‰ã«å¤±æ•—ã—ã¾ã—ãŸ\n"
+		      + "DengakuDLL.dllãŒç§€ä¸¸ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«å­˜åœ¨ã™ã‚‹ã‹ç¢ºèªã—ã¦ãã ã•ã„";
+		return false;
 	}
-	$$search_words=$$return;
-	call ConvertOutputMode;
-	##output_mode = ##return;
+	call Start;
+	##result=##return;
+	freedll;
+	return ##result;
 
-	call RunEverything ##output_mode, $$search_words;
-	return ##return;
+
+Start:
+	call CreateDialog;
+	if(! ##return){
+		return false;
+	}
+	
+	//debuginfo 1;
+	
+	//æ–‡å­—å…¥åŠ›ä¸­ã«é©åº¦ãªé–“éš”ã§ãƒ•ã‚¡ã‚¤ãƒ«å†…å®¹ã‚’æ›´æ–°ã™ã‚‹ã€‚
+	##interval			= 300;
+	##prev_tick 		= 0;
+	$$prev_search_pattern="";
+	while (1) {
+		##current_tick = tickcount;
+		if(##interval < (##current_tick - ##prev_tick)){
+			$g_search_pattern = dllfuncstr("GETCTRLSTRING", "CTagsDlg@Param");
+			call TrimString $g_search_pattern;
+			$g_search_pattern=$$return;
+			if($g_search_pattern != $$prev_search_pattern){
+				if($g_search_pattern == ""){
+					//å¾Œå›ã—
+					//call ClearText;
+				}else{
+					//call RunEverything  $g_search_pattern;
+					call SearchWordsToRegex $g_search_pattern;
+					debuginfo $$return;
+				}
+				$$prev_search_pattern=$g_search_pattern;
+			}
+			##prev_tick = ##current_tick;
+		}
+		
+		$$item = dllfuncstr("WAITCTRLNOTIFY",60);
+		if($$item=="0"){
+			break;
+		}else if($$item=="0"){
+			break;
+		}else if ($$item == $g_notify_close) {
+			break;
+		}
+	}
+	##n = dllfunc("ENDDIALOG");
+	
+	//#writeinistr $g_ini_filename,$g_ini_dialog_section,$g_ini_dialog_key,$$current_input;
+	return true;
+
+CreateDialog:
+	$g_search_pattern = getinistr($g_ini_filename,$g_ini_dialog_section,$g_ini_dialog_key);
+	if (dllfunc("NEWDIALOG", "Everythingã§ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ¤œç´¢ã™ã‚‹ãƒã‚¯ãƒ­ " + $g_version, 128) == 0 ||
+		dllfunc("NEWCONTROL", "text", "", "æ¤œç´¢(S)") == 0 ||
+		dllfunc("SETCTRLWIDTH", "", 8) == 0 ||
+		dllfunc("NEWCONTROL", "edit", "CTagsDlg@Param", $g_search_pattern) == 0 ||
+		dllfunc("NEWCONTROL","defbutton","","Close") == 0 ||
+		dllfunc("SETCTRLNOTIFY", "", $g_notify_close) == 0)
+	{
+		message "ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸ\n";
+		return false;
+	}
+	// ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®è¡¨ç¤º
+	##n = dllfunc("SHOWDIALOG", 0, 0);
+	return true;
 
 InputFromText:
 	if(selecting){
@@ -143,85 +205,82 @@ InputFromText:
 	}
 	return $$search_words;
 
-InputFromBox:
-	$$prev_input = getinistr($g_ini_filename,$g_ini_dialog_section,$g_ini_dialog_key);
-	$$current_input = input("ŒŸõ‚·‚éƒtƒ@ƒCƒ‹–¼‚ğ“ü—Í‚µ‚Ä‰º‚³‚¢B(*.txt)",$$prev_input);
-	if($$current_input!= ""){
-		writeinistr $g_ini_filename,$g_ini_dialog_section,$g_ini_dialog_key,$$current_input;
-	}
-	return $$current_input;
-
-ConvertOutputMode:
-	if(#g_output_mode==0){
-		return 7;
-	}
-	if(#g_output_mode==1){
-		return 4;
-	}
-	if(#g_output_mode==2){
-		return 5;
-	}
-	return 0;
 
 CheckEnvironment:
 	if(! existfile($g_exe)){
-		message "Everything‚ÌƒRƒ}ƒ“ƒhƒ‰ƒCƒ“Àsƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB\n" +
+		message "Everythingã®ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚\n" +
 				"\n"+
-				"Œ©‚Â‚©‚ç‚È‚¢ƒtƒ@ƒCƒ‹\n"+
+				"è¦‹ã¤ã‹ã‚‰ãªã„ãƒ•ã‚¡ã‚¤ãƒ«\n"+
 				$g_exe;
 
 		return false;
 	}
 	return true;
 
-GetSearchText:
-	$$result="";
-	if(#g_input_mode==0){
-		call InputFromText;
-		$$result=$$return;
-	}else if(#g_input_mode==1){
-		call InputFromBox;
-		$$result=$$return;
-	}else{
-		return "";
-	}
-	if($$result==""){
-		return "";
-	}
-
-	call TrimString $$result;
-	$$result=$$return;
-	return $$result;
-
 RunEverything:
-	##output_mode=##1;
-	$$search_words=$$2;
+	$$search_words=$$1;
 	$$arg_exe = "\"" + $g_exe + "\"";
-	$$option = "-p";
+	$$option = $g_option + " -p";
 	$$run_str = $$arg_exe + " " + $$option + " " + $$search_words;
-	//message $$run_str;
-	runex $$run_str,
-			0,						//sync	  0:async 1:sync
-			0, "",					//stdin   0:none 1:auto 2:file 3:(reserve) 4:all 5:select
-			##output_mode, "",		//stdout  0:none 1:auto 2:file 3:add file  4:new 5:insert 6:replace
-			##output_mode, "",		//stderr  0:none 1:=out 2:file 3:add file  4:new 5:insert 6:replace
-			1, "",					//folder  0:none 1:current 2:specify 3:(reserve) 4:exe's folder
-			2,						//show	  0:auto 1:show 2:hide
-			0,						//nodraw  0:draw 1:no draw
-			0						//unicode 0:ansi 2:unicode
-			;
+	if(true){
+		disabledraw;
+		selectall;
+		backspace;
+		enabledraw;
+		runex $$run_str,
+				0,						//sync	  0:async 1:sync
+				0, "",					//stdin   0:none 1:auto 2:file 3:(reserve) 4:all 5:select
+				5, "",		//stdout  0:none 1:auto 2:file 3:add file  4:new 5:insert 6:replace
+				5, "",		//stderr  0:none 1:=out 2:file 3:add file  4:new 5:insert 6:replace
+				1, "",					//folder  0:none 1:current 2:specify 3:(reserve) 4:exe's folder
+				2,						//show	  0:auto 1:show 2:hide
+				0,						//nodraw  0:draw 1:no draw
+				0						//unicode 0:ansi 2:unicode
+				;
+		call HilightWrold $$search_words;
+	}else{
+		runex $$run_str,
+				1,						//sync	  0:async 1:sync
+				0, "",					//stdin   0:none 1:auto 2:file 3:(reserve) 4:all 5:select
+				7, "",		//stdout  0:none 1:auto 2:file 3:add file  4:new 5:insert 6:replace
+				7, "",		//stderr  0:none 1:=out 2:file 3:add file  4:new 5:insert 6:replace
+				1, "",					//folder  0:none 1:current 2:specify 3:(reserve) 4:exe's folder
+				2,						//show	  0:auto 1:show 2:hide
+				0,						//nodraw  0:draw 1:no draw
+				0						//unicode 0:ansi 2:unicode
+				;
+	}
 	return result;
 
+
+HilightWrold:
+	$$search_words=$$1;
+	call SearchWordsToRegex $$search_words;
+	$$regex=$$return;
+	setsearch $$regex,0x00000800;
+	hilightfound 1;
+	return;
+
+
+SearchWordsToRegex:
+	/*ç©ºç™½åŒºåˆ‡ã‚Šã®æ–‡å­—åˆ—ã‚’æ­£è¦è¡¨ç¾ã«å¤‰æ›ã™ã‚‹ã€‚
+	[in]	"hoge 123 .txt"
+	[out]	"hoge|123|\.txt"
+	*/
+	$$word_list=$$1;
+	$$escaped = dllfuncstr("HMJRE_REPLACE_REGULAR", "[+.|?*()\\[\\]\\\\$\"-]", $$word_list, 0, "\\\\\\0", 1);
+	$$regex = dllfuncstr("ReplaceRegular", "[" + $g_space + "]+", $$escaped, 0, "|", 2);
+	return $$regex;
+
 TrimString:
-	$$space="\r\n\t @";//‹ó”’•¶š‚ğ’è‹`
 	while(1){
 	  ##word=strlen($$1);
-	  //•¶š—ñ‚Ìæ“ª‚É‹ó”’•¶š‚ª‚ ‚éê‡A‹ó”’•¶š‚ğíœ
-	  if(strstr($$space,leftstr($$1,2))!=-1)$$1=rightstr($$1,##word-2);
-	  else if(strstr($$space,rightstr($$1,2))!=-1)$$1=leftstr($$1,##word-2);
-	  //‚±‚±‚Ü‚Å‘SŠp•¶š‚Ì‘Îˆ
-	  else if(strstr($$space,leftstr($$1,1))!=-1)$$1=rightstr($$1,##word-1);
-	  else if(strstr($$space,rightstr($$1,1))!=-1)$$1=leftstr($$1,##word-1);
+	  //æ–‡å­—åˆ—ã®å…ˆé ­ã«ç©ºç™½æ–‡å­—ãŒã‚ã‚‹å ´åˆã€ç©ºç™½æ–‡å­—ã‚’å‰Šé™¤
+	  if(strstr($g_space,leftstr($$1,2))!=-1)$$1=rightstr($$1,##word-2);
+	  else if(strstr($g_space,rightstr($$1,2))!=-1)$$1=leftstr($$1,##word-2);
+	  //ã“ã“ã¾ã§å…¨è§’æ–‡å­—ã®å¯¾å‡¦
+	  else if(strstr($g_space,leftstr($$1,1))!=-1)$$1=rightstr($$1,##word-1);
+	  else if(strstr($g_space,rightstr($$1,1))!=-1)$$1=leftstr($$1,##word-1);
 	  else break;
 	}
 	return $$1;
