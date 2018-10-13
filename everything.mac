@@ -1,5 +1,21 @@
 /* 秀丸エディタからEverythingを使用するマクロ。
 
+＊Todo
+・<c-r>		「通常の検索モード、正規表現」の切り替え
+・<c-f>		「通常の検索パス、プロジェクトディレクトリ、カレントディレクトリ」を切り替える
+・<c-d>		フルパス検索モードとファイル名のみの検索モードを切り替え
+・<c-p>		検索履歴を辿る
+  <c-n> 
+・<c-c>		ESCキーが押されたことにする
+
+＊やること
+・検索ディレクトリをGUI右側に固定する
+・プロジェクトディレクトリを探す
+・設定をiniに保存する
+（検索履歴）
+・検索履歴を辿る
+・iniにsave/load
+
 *連絡先
 https://github.com/ohtorii/everything
 http://d.hatena.ne.jp/ohtorii/
@@ -12,30 +28,57 @@ https://twitter.com/ohtorii
 *****************************************************************************/
 //バージョン番号
 $g_version 		= "version 2.0.0(2018/10/08)";
+
+
 $dengaku_dll 	= hidemarudir + "\\DengakuDLL.dll";
 #g_hmjre_dll 	= 0;
 #g_open_newfile	= false;
 #g_new_hidemaru	= 0;
 #g_old_hidemaru	= 0;
+
+//検索するファイルパス
+$g_path_current=directory;
+$g_path_project="C:\\Users\\hoge\\Documents\\develop";
+
 //空白文字の定義
 $g_space="\r\n\t 　";
+
+/*************************
+	各種モード
+*************************/
+/*検索モード*/
+#g_SEARCH_DEFAULT	=0;
+#g_SEARCH_REGEX		=1;
+#g_search_mode		=#g_SEARCH_DEFAULT;
+/*フルパス名マッチするかどうか*/
+#g_match_full_path	= true;
+
+/*検索するファイルパスのモード*/
+#g_PATH_MODE_NONE		= 0;
+#g_PATH_MODE_CURRENT	= 1;
+#g_PATH_MODE_PROJECT	= 2;
+#g_path_mode			= #g_PATH_MODE_PROJECT;
 
 /*************************
 	iniファイルの設定
 *************************/
 $g_ini_filename			= currentmacrofilename+".config.ini";
-$g_ini_exe_section		= "program";
-$g_ini_exe_command		= "command";
-$g_ini_exe_argument		= "argument";
-$g_ini_dialog_section	= "dialog";
-$g_ini_dialog_key		= "input";
+$g_ini_exe_section					= "program";
+$g_ini_exe_command					= "command";
+$g_ini_exe_argument_default			= "argument_default";
+$g_ini_exe_argument_regex			= "argument_regex";
+$g_ini_exe_option_match_full_path	= "option_match_full_path";
+$g_ini_dialog_section				= "history";
+$g_ini_dialog_key					= "input";
 
 /*************************
 	実行ファイルの設定
 **************************/
 /* es.exe へのパス */
-$g_exe 		= "";
-$g_option 	= "";
+$g_exe 						= "";
+$g_argument_default			= "";
+$g_argument_regex			= "";
+$g_option_match_full_path	= "";
 
 /*************************
 ダイアログ関係
@@ -66,7 +109,7 @@ Main:
 	if(! ##return){
 		return false;
 	}
-	
+
 	call NewfileIfExist;
 	if(##return==false){
 		return false;
@@ -86,12 +129,14 @@ Main:
 	}
 	call Start;
 	##result=##return;
+
 	call WriteIni;
-	
+
 	freedll;
 	freedll #g_hmjre_dll;
 	#g_hmjre_dll = 0;
-	
+
+	clearupdated;
 	if(! ##result){
 		call CloseFileIfOpen;
 	}
@@ -100,13 +145,17 @@ Main:
 
 LoadIni:
 	$g_exe 				= getinistr($g_ini_filename,$g_ini_exe_section,   $g_ini_exe_command);
-	$g_option 			= getinistr($g_ini_filename,$g_ini_exe_section,   $g_ini_exe_argument);
+	$g_argument_default	= getinistr($g_ini_filename,$g_ini_exe_section,   $g_ini_exe_argument_default);
+	$g_argument_regex	= getinistr($g_ini_filename,$g_ini_exe_section,   $g_ini_exe_argument_regex);
+	$g_option_match_full_path = getinistr($g_ini_filename,$g_ini_exe_section,   $g_ini_exe_option_match_full_path);
 	$g_search_pattern 	= getinistr($g_ini_filename,$g_ini_dialog_section,$g_ini_dialog_key);
 	return true;
+
 
 WriteIni:
 	writeinistr $g_ini_filename,$g_ini_dialog_section,$g_ini_dialog_key,$g_search_pattern;
 	return ##return;
+
 
 Start:
 	/*
@@ -118,6 +167,8 @@ Start:
 		return false;
 	}
 
+	debuginfo 1;
+
 	//文字入力中に適度な間隔でファイル内容を更新する。
 	##interval			= 300;
 	##prev_tick 		= 0;
@@ -126,14 +177,12 @@ Start:
 		##current_tick = tickcount;
 		if(##interval < (##current_tick - ##prev_tick)){
 			$g_search_pattern = dllfuncstr("GETCTRLSTRING", "Everything@Param");
+
 			call TrimString $g_search_pattern;
 			$g_search_pattern=$$return;
+
 			if($g_search_pattern != $$prev_search_pattern){
-				if($g_search_pattern == ""){
-					call ClearText;
-				}else{
-					call RunEverything  $g_search_pattern;
-				}
+				call UpdateSearchWindow;
 				$$prev_search_pattern=$g_search_pattern;
 			}
 			##prev_tick = ##current_tick;
@@ -148,6 +197,29 @@ Start:
 			break;
 		}
 
+		if(iskeydown(0x11)){		//ctrl
+			if(iskeydown(0x43)){
+				//<c-c>
+				$$item="0";
+				break;
+			}else if(iskeydown(0x52)){
+				//<c-r>
+				call ToggleSearchMode;
+				call UpdateDialogStatus;
+				call UpdateSearchWindow;
+			}else if(iskeydown(0x44)){
+				//<c-d>
+				call ToggleMatchFullPathMode;
+				call UpdateDialogStatus;
+				call UpdateSearchWindow;
+			}else if(iskeydown(0x46)){
+				//<c-f>
+				call SwitchPathMode;
+				call UpdateDialogStatus;
+				call UpdateSearchWindow;
+			}
+		}/*else if(iskeydown(0x12)){		//alt
+		}*/
 	}
 	##n = dllfunc("ENDDIALOG");
 
@@ -160,6 +232,35 @@ Start:
 	}
 	//念のためウインドウを開いたままにする
 	return true;
+
+
+ToggleMatchFullPathMode:
+	if(#g_match_full_path){
+		#g_match_full_path=false;
+	}else{
+		#g_match_full_path=true;
+	}
+	return;
+
+
+ToggleSearchMode:
+	if(#g_search_mode==#g_SEARCH_DEFAULT){
+		#g_search_mode = #g_SEARCH_REGEX;
+	}else{
+		#g_search_mode = #g_SEARCH_DEFAULT;
+	}
+	return ;
+
+
+SwitchPathMode:
+	if(#g_path_mode == #g_PATH_MODE_NONE){
+		#g_path_mode=#g_PATH_MODE_CURRENT;
+	}else if(#g_path_mode == #g_PATH_MODE_CURRENT){
+		#g_path_mode=#g_PATH_MODE_PROJECT;
+	}else if(#g_path_mode == #g_PATH_MODE_PROJECT){
+		#g_path_mode=#g_PATH_MODE_NONE;
+	}
+	return;
 
 
 NewfileIfExist:
@@ -182,15 +283,38 @@ CloseFileIfOpen:
 	if(#g_open_newfile){
 		setactivehidemaru	#g_old_hidemaru;
 		closehidemaruforced #g_new_hidemaru;
-		
+
 		#g_old_hidemaru=0;
 		#g_new_hidemaru=0;
 	}
 	return true;
 
 
+UpdateDialogStatus:
+	if(#g_search_mode==#g_SEARCH_DEFAULT){
+		$$mode="";
+	}else{
+		$$mode=" regex";
+	}
+
+	if(#g_match_full_path){
+		$$path="path";
+	}else{
+		$$path="file";
+	}
+	
+	call GetSearchPath;
+	$$path_mode = $$return;
+	$$status="[prt]" + $$path + $$mode + "        |        "+$$path_mode;
+	if(dllfunc("SETCTRLSTRING","Everything@Status",$$status)==0){
+		return false;
+	}
+	return true;
+
+
 CreateDialog:
 	if (dllfunc("NEWDIALOG", "Everythingでファイルを検索するマクロ " + $g_version, 128) == 0 ||
+		dllfunc("NEWCONTROL", "text", "Everything@Status", "") == 0 ||
 		dllfunc("NEWCONTROL", "text", "", "検索(S)") == 0 ||
 		dllfunc("SETCTRLWIDTH", "", 8) == 0 ||
 		dllfunc("NEWCONTROL", "edit", "Everything@Param", $g_search_pattern) == 0 ||
@@ -199,6 +323,7 @@ CreateDialog:
 		message "ダイアログの作成に失敗しました\n";
 		return false;
 	}
+	call UpdateDialogStatus;
 	// ダイアログの表示
 	##n = dllfunc("SHOWDIALOG", 0, 0);
 	return true;
@@ -231,6 +356,16 @@ CheckEnvironment:
 	}
 	return true;
 
+
+UpdateSearchWindow:
+	if($g_search_pattern == ""){
+		call ClearText;
+	}else{
+		call RunEverything  $g_search_pattern;
+	}
+	return;
+
+
 ClearText:
 	disabledraw;
 	selectall;
@@ -238,11 +373,61 @@ ClearText:
 	enabledraw;
 	return;
 
+
+GetSearchPath:
+	if(#g_path_mode==#g_PATH_MODE_NONE){
+		$$path_mode = "";
+	}else if(#g_path_mode==#g_PATH_MODE_CURRENT){
+		$$path_mode = $g_path_current;
+	}else if(#g_path_mode==#g_PATH_MODE_PROJECT){
+		$$path_mode = $g_path_project;
+	}else{
+		$$path_mode = "";
+	}
+	return $$path_mode;
+	
+
+MakeEverythingArgument:
+	$$search_words = $$1;
+
+	if(#g_match_full_path){
+		$$match_full_path = " "+$g_option_match_full_path;
+	}else{
+		$$match_full_path = "";
+	}
+
+	if(#g_search_mode==#g_SEARCH_DEFAULT){
+		$$search_mode = " "+$g_argument_default;
+	}else{
+		$$search_mode = " "+$g_argument_regex;
+	}
+	
+	call GetSearchPath;
+	$$path_mode = $$return;
+	
+	if($$path_mode != ""){
+		if(#g_search_mode==#g_SEARCH_REGEX){
+			$$path_mode = quote($$path_mode);
+		}else{
+			//(memo)通常検索の場合。
+			//パス名を検索語句とするために空白文字を追加する。
+			$$path_mode = $$path_mode+" ";
+		}
+	}
+	
+	$$argument = $$match_full_path + $$search_mode;
+	$$argument = sprintf($$argument, $$path_mode+$$search_words);
+	return $$argument;
+
+
 RunEverything:
-	$$search_words=$$1;
-	$$arg_exe = "\"" + $g_exe + "\"";
-	$$option = $g_option + " -p";
-	$$run_str = $$arg_exe + " " + $$option + " " + $$search_words;
+	$$search_words = $$1;
+	call MakeEverythingArgument $$search_words;
+	$$argument = $$return;
+
+	$$arg_exe 	= "\"" + $g_exe + "\"";
+	$$run_str  = $$arg_exe + " " + $$argument;
+	debuginfo $$run_str;
 	if(true){
 		call ClearText;
 		runex $$run_str,
@@ -273,8 +458,12 @@ RunEverything:
 
 HilightWrold:
 	$$search_words=$$1;
-	call SearchWordsToRegex $$search_words;
-	$$regex=$$return;
+	if(#g_search_mode==#g_SEARCH_DEFAULT){
+		call SearchWordsToRegex $$search_words;
+		$$regex=$$return;
+	}else{
+		$$regex=$$search_words;
+	}
 	setsearch $$regex,0x00000800|0x00000010;
 	hilightfound 1;
 	return;
@@ -286,7 +475,7 @@ SearchWordsToRegex:
 	[out]	"hoge|123|\.txt"
 	*/
 	$$word_list=$$1;
-	$$escaped = dllfuncstr(#g_hmjre_dll,"ReplaceRegular", "[+.|?*()\\[\\]\\\\$\"-]", $$word_list, 0, "\\\\\\0", 2);
+	$$escaped=quote($$word_list);
 	$$regex = dllfuncstr(#g_hmjre_dll,"ReplaceRegular", "[" + $g_space + "]+", $$escaped, 0, "|", 2);
 	return $$regex;
 
