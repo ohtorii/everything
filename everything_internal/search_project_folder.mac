@@ -1,0 +1,48 @@
+﻿/*プロジェクトフォルダを探す
+
+（利用例）
+execmacro "search_project_folder.mac" "c:\\my_project\\src\system\\heap";
+
+（マクロの返値）
+プロジェクトルートのフォルダを見つけるとその文字列を返します、
+見つからない場合は空文字を返します。
+*/
+
+$g_markers[0] = ".git",
+$g_markers[1] = ".hg",
+$g_markers[2] = ".svn",
+$g_markers[3] = ".bzr",
+$g_markers[4] = "_darcs",
+#g_markers_len= 5;
+
+
+main:
+	$$current_folder=getarg(0);
+	call findroot $$current_folder;
+	return $$return;
+
+findroot:
+	$$current_folder=$$1;
+	
+
+	##i=0;
+	while(##i < #g_markers_len){
+		$$project_folder=$$current_folder+"\\"+$g_markers[##i];
+		if(existfile($$project_folder,1) & 0x00000010){
+			return $$project_folder;
+		}
+		##i = ##i + 1;
+	}
+	
+	この辺りを作成中
+	
+	return "";
+
+
+getparent:
+	$$item=$$1;
+	let parent = substitute(a:item, '[\/][^\/]\+[\/:]\?$', '', '')
+	if parent == '' || parent !~ '[\/]'
+		let parent .= s:lash
+	en
+	retu parent
