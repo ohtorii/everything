@@ -1,16 +1,19 @@
 /* 秀丸エディタからEverythingを使用するマクロ。
 
 ＊Todo
-・<c-r>		「通常の検索モード、正規表現」の切り替え
-・<c-f>		「通常の検索パス、プロジェクトディレクトリ、カレントディレクトリ」を切り替える
-・<c-d>		フルパス検索モードとファイル名のみの検索モードを切り替え
+・<c-r>		(済)「通常の検索モード、正規表現」の切り替え
+・<c-f>		(済)検索パス切り替え（通常、プロジェクトディレクトリ、カレントディレクトリ）
+  <c-s-f>	(済)
+・<c-d>		(済)フルパス検索モードとファイル名のみの検索モードを切り替え
 ・<c-p>		検索履歴を辿る
   <c-n> 
-・<c-c>		ESCキーが押されたことにする
+・<c-c>		(済)ESCキーが押されたことにする
+・<f1>		ヘルプ表示（?キー）
+・
 
 ＊やること
 ・検索ディレクトリをGUI右側に固定する
-・プロジェクトディレクトリを探す
+・(済)プロジェクトディレクトリを探す
 ・設定をiniに保存する
 （検索履歴）
 ・検索履歴を辿る
@@ -37,8 +40,9 @@ $dengaku_dll 	= hidemarudir + "\\DengakuDLL.dll";
 #g_old_hidemaru	= 0;
 
 //検索するファイルパス
-$g_path_current=directory;
-$g_path_project="C:\\Users\\hoge\\Documents\\develop";
+$g_path_current=directory2;
+execmacro currentmacrodirectory+"\\everything_internal\\search_project_folder.mac", filename2;
+$g_path_project=getresultex(-1);
 
 //空白文字の定義
 $g_space="\r\n\t 　";
@@ -57,19 +61,21 @@ $g_space="\r\n\t 　";
 #g_PATH_MODE_NONE		= 0;
 #g_PATH_MODE_CURRENT	= 1;
 #g_PATH_MODE_PROJECT	= 2;
-#g_path_mode			= #g_PATH_MODE_PROJECT;
+#g_path_mode			= #g_PATH_MODE_NONE;
 
 /*************************
 	iniファイルの設定
 *************************/
-$g_ini_filename			= currentmacrofilename+".config.ini";
-$g_ini_exe_section					= "program";
-$g_ini_exe_command					= "command";
-$g_ini_exe_argument_default			= "argument_default";
-$g_ini_exe_argument_regex			= "argument_regex";
-$g_ini_exe_option_match_full_path	= "option_match_full_path";
-$g_ini_dialog_section				= "history";
-$g_ini_dialog_key					= "input";
+$g_ini_config_filename = currentmacrofilename + ".config.ini";
+$g_ini_histry_filename = currentmacrofilename + ".history.ini";
+
+//$g_ini_exe_section					= "program";
+//$g_ini_exe_command					= "command";
+//$g_ini_exe_argument_default			= "argument_default";
+//$g_ini_exe_argument_regex			= "argument_regex";
+//$g_ini_exe_option_match_full_path	= "option_match_full_path";
+//$g_ini_dialog_section				= "history";
+//$g_ini_dialog_key					= "input";
 
 /*************************
 	実行ファイルの設定
@@ -144,16 +150,16 @@ Main:
 
 
 LoadIni:
-	$g_exe 				= getinistr($g_ini_filename,$g_ini_exe_section,   $g_ini_exe_command);
-	$g_argument_default	= getinistr($g_ini_filename,$g_ini_exe_section,   $g_ini_exe_argument_default);
-	$g_argument_regex	= getinistr($g_ini_filename,$g_ini_exe_section,   $g_ini_exe_argument_regex);
-	$g_option_match_full_path = getinistr($g_ini_filename,$g_ini_exe_section,   $g_ini_exe_option_match_full_path);
-	$g_search_pattern 	= getinistr($g_ini_filename,$g_ini_dialog_section,$g_ini_dialog_key);
+	$g_exe						= getinistr($g_ini_config_filename,"program","command"					);
+	$g_argument_default 		= getinistr($g_ini_config_filename,"program","argument_default" 		);
+	$g_argument_regex			= getinistr($g_ini_config_filename,"program","argument_regex"			);
+	$g_option_match_full_path	= getinistr($g_ini_config_filename,"program","option_match_full_path"	);
+	$g_search_pattern			= getinistr($g_ini_config_filename,"history","input"					);
 	return true;
 
 
 WriteIni:
-	writeinistr $g_ini_filename,$g_ini_dialog_section,$g_ini_dialog_key,$g_search_pattern;
+	writeinistr $g_ini_config_filename, "history", "input", $g_search_pattern;
 	return ##return;
 
 
@@ -196,8 +202,10 @@ Start:
 			//ok
 			break;
 		}
-
-		if(iskeydown(0x11)){		//ctrl
+		
+		##shift=iskeydown(0x10);
+		##ctrl=iskeydown(0x11);
+		if(##ctrl){		//ctrl
 			if(iskeydown(0x43)){
 				//<c-c>
 				$$item="0";
@@ -213,8 +221,13 @@ Start:
 				call UpdateDialogStatus;
 				call UpdateSearchWindow;
 			}else if(iskeydown(0x46)){
-				//<c-f>
-				call SwitchPathMode;
+				if(##shift){
+					//<c-s-f>
+					call SwitchPathMode false;
+				}else{
+					//<c-f>
+					call SwitchPathMode true;
+				}
 				call UpdateDialogStatus;
 				call UpdateSearchWindow;
 			}
@@ -253,12 +266,24 @@ ToggleSearchMode:
 
 
 SwitchPathMode:
-	if(#g_path_mode == #g_PATH_MODE_NONE){
-		#g_path_mode=#g_PATH_MODE_CURRENT;
-	}else if(#g_path_mode == #g_PATH_MODE_CURRENT){
-		#g_path_mode=#g_PATH_MODE_PROJECT;
-	}else if(#g_path_mode == #g_PATH_MODE_PROJECT){
-		#g_path_mode=#g_PATH_MODE_NONE;
+	if(##1){
+		//正順
+		if(#g_path_mode == #g_PATH_MODE_NONE){
+			#g_path_mode=#g_PATH_MODE_CURRENT;
+		}else if(#g_path_mode == #g_PATH_MODE_CURRENT){
+			#g_path_mode=#g_PATH_MODE_PROJECT;
+		}else if(#g_path_mode == #g_PATH_MODE_PROJECT){
+			#g_path_mode=#g_PATH_MODE_NONE;
+		}
+	}else{
+		//逆順
+		if(#g_path_mode == #g_PATH_MODE_NONE){
+			#g_path_mode=#g_PATH_MODE_PROJECT;
+		}else if(#g_path_mode == #g_PATH_MODE_CURRENT){
+			#g_path_mode=#g_PATH_MODE_NONE;
+		}else if(#g_path_mode == #g_PATH_MODE_PROJECT){
+			#g_path_mode=#g_PATH_MODE_CURRENT;
+		}
 	}
 	return;
 
@@ -296,25 +321,29 @@ UpdateDialogStatus:
 	}else{
 		$$mode=" regex";
 	}
-
 	if(#g_match_full_path){
 		$$path="path";
 	}else{
 		$$path="file";
 	}
+	##n=dllfunc("SETCTRLSTRING","Everything@Status", $$path + $$mode);
 	
+	call GetSearchPathModeString;
+	$$search_path_mode=$$return;
 	call GetSearchPath;
-	$$path_mode = $$return;
-	$$status="[prt]" + $$path + $$mode + "        |        "+$$path_mode;
-	if(dllfunc("SETCTRLSTRING","Everything@Status",$$status)==0){
-		return false;
+	$$search_path = $$return;
+	if($$search_path==""){
+		$$search_path="*";
 	}
-	return true;
+	##n=dllfunc("SETCTRLSTRING","Everything@SearchPath", "["+$$search_path_mode+"]" + $$search_path);
+	return ;
 
 
 CreateDialog:
 	if (dllfunc("NEWDIALOG", "Everythingでファイルを検索するマクロ " + $g_version, 128) == 0 ||
 		dllfunc("NEWCONTROL", "text", "Everything@Status", "") == 0 ||
+		dllfunc("SETCTRLWIDTH", "", 10) == 0 ||
+		dllfunc("NEWCONTROL", "text", "Everything@SearchPath", "") == 0 ||
 		dllfunc("NEWCONTROL", "text", "", "検索(S)") == 0 ||
 		dllfunc("SETCTRLWIDTH", "", 8) == 0 ||
 		dllfunc("NEWCONTROL", "edit", "Everything@Param", $g_search_pattern) == 0 ||
@@ -327,6 +356,7 @@ CreateDialog:
 	// ダイアログの表示
 	##n = dllfunc("SHOWDIALOG", 0, 0);
 	return true;
+
 
 InputFromText:
 	if(selecting){
@@ -347,7 +377,7 @@ CheckEnvironment:
 				"【見つからない実行ファイル名】\n"	+
 				$g_exe + "\n\n" 					+
 				"【iniファイル名】\n"				+
-				$g_ini_filename	+ "\n\n"			+
+				$g_ini_config_filename	+ "\n\n"	+
 				"【対応方法】\n"					+
 				"iniファイルに正しい実行ファイル名を設定して下さい。\n"
 				;
@@ -386,6 +416,19 @@ GetSearchPath:
 	}
 	return $$path_mode;
 	
+
+GetSearchPathModeString:
+	if(#g_path_mode==#g_PATH_MODE_NONE){
+		return "default";
+	}else if(#g_path_mode==#g_PATH_MODE_CURRENT){
+		return "current";
+	}else if(#g_path_mode==#g_PATH_MODE_PROJECT){
+		return "project";
+	}else{
+		return "";
+	}
+	return "";
+
 
 MakeEverythingArgument:
 	$$search_words = $$1;

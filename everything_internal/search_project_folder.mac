@@ -1,48 +1,73 @@
-ï»¿/*ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆãƒ•ã‚©ãƒ«ãƒ€ã‚’æ¢ã™
+/*ƒvƒƒWƒFƒNƒgƒtƒHƒ‹ƒ_‚ğ’T‚·
 
-ï¼ˆåˆ©ç”¨ä¾‹ï¼‰
+i—˜—p—áj
 execmacro "search_project_folder.mac" "c:\\my_project\\src\system\\heap";
 
-ï¼ˆãƒã‚¯ãƒ­ã®è¿”å€¤ï¼‰
-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆãƒ«ãƒ¼ãƒˆã®ãƒ•ã‚©ãƒ«ãƒ€ã‚’è¦‹ã¤ã‘ã‚‹ã¨ãã®æ–‡å­—åˆ—ã‚’è¿”ã—ã¾ã™ã€
-è¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯ç©ºæ–‡å­—ã‚’è¿”ã—ã¾ã™ã€‚
+iƒ}ƒNƒ‚Ì•Ô’lj
+ƒvƒƒWƒFƒNƒgƒ‹[ƒg‚ÌƒtƒHƒ‹ƒ_‚ğŒ©‚Â‚¯‚é‚Æ‚»‚Ì•¶š—ñ‚ğ•Ô‚µ‚Ü‚·A
+Œ©‚Â‚©‚ç‚È‚¢ê‡‚Í‹ó•¶š‚ğ•Ô‚µ‚Ü‚·B
 */
 
-$g_markers[0] = ".git",
-$g_markers[1] = ".hg",
-$g_markers[2] = ".svn",
-$g_markers[3] = ".bzr",
-$g_markers[4] = "_darcs",
+$g_markers[0] = ".git";
+$g_markers[1] = ".hg";
+$g_markers[2] = ".svn";
+$g_markers[3] = ".bzr";
+$g_markers[4] = "_darcs";
 #g_markers_len= 5;
+
+#g_dll 	= 0;
+
+
+
+call main;
+endmacro $$return;
 
 
 main:
+	#g_dll=loaddll(hidemarudir+"\\ht_tools.dll");
+	if(#g_dll==0){
+		message "ht_tools.dll ‚Ìƒ[ƒh‚É¸”s‚µ‚Ü‚µ‚½\n" +
+				"ht_tools.dll ‚ªGŠÛƒGƒfƒBƒ^‚ÌƒfƒBƒŒƒNƒgƒŠ‚É‘¶İ‚·‚é‚©Šm”F‚µ‚Ä‚­‚¾‚³‚¢";
+		return false;
+	}
+	debuginfo 1;
+	
 	$$current_folder=getarg(0);
+	//$$current_folder="\\\\Users\\ikeuc_000\\Documents\\GitHub\\";
+	
 	call findroot $$current_folder;
-	return $$return;
+	$$project_folder=$$return;
+	
+	debuginfo "project_folder=" + $$project_folder;
+	
+	freedll(#g_dll);
+	#g_dll=0;
+	return $$project_folder;
+
 
 findroot:
 	$$current_folder=$$1;
+	debuginfo "$$current_folder="+$$current_folder;
 	
-
 	##i=0;
 	while(##i < #g_markers_len){
-		$$project_folder=$$current_folder+"\\"+$g_markers[##i];
-		if(existfile($$project_folder,1) & 0x00000010){
-			return $$project_folder;
+		$$sub_folder=$$current_folder+"\\"+$g_markers[##i];
+		if(existfile($$sub_folder,1) & 0x00000010){
+			return $$current_folder;
 		}
 		##i = ##i + 1;
 	}
+	if(strlen($$current_folder) <= 3){
+		//"c:\" ‚Ìƒpƒ^[ƒ“
+		return "";
+	}
 	
-	ã“ã®è¾ºã‚Šã‚’ä½œæˆä¸­
-	
-	return "";
+	call getparent $$current_folder;
+	$$parent=$$return;
+	call findroot $$parent;
+	return $$return;
 
 
 getparent:
-	$$item=$$1;
-	let parent = substitute(a:item, '[\/][^\/]\+[\/:]\?$', '', '')
-	if parent == '' || parent !~ '[\/]'
-		let parent .= s:lash
-	en
-	retu parent
+	$$parent = dllfuncstr(#g_dll, "GetParentFolder", $$1);
+	return $$parent;
