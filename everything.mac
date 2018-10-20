@@ -69,13 +69,6 @@ $g_space="\r\n\t 　";
 $g_ini_config_filename = currentmacrofilename + ".config.ini";
 $g_ini_histry_filename = currentmacrofilename + ".history.ini";
 
-//$g_ini_exe_section					= "program";
-//$g_ini_exe_command					= "command";
-//$g_ini_exe_argument_default			= "argument_default";
-//$g_ini_exe_argument_regex			= "argument_regex";
-//$g_ini_exe_option_match_full_path	= "option_match_full_path";
-//$g_ini_dialog_section				= "history";
-//$g_ini_dialog_key					= "input";
 
 /*************************
 	実行ファイルの設定
@@ -534,3 +527,70 @@ TrimString:
 	  else break;
 	}
 	return $$1;
+
+
+/*****************************************************************************
+	検索ヒストリ
+*****************************************************************************/
+#g_MAX_HISTORY_NUM=8;
+#g_history_top_index=0;		//先頭のインデックス
+#g_history_end_index=0;		//最後のインデックス
+#g_history_current_index=0; //現在のインデックス
+$g_histroy[0]="";			//ヒストリのリングバッファ
+
+/*ヒストリに文字列をセットする。
+ヒストリを初期化する目的で利用する。
+##1	index
+$$2	設定する文字列
+*/
+HistorySet:
+	$g_histroy[##1]=$$2;
+	return;
+
+/*ヒストリを取得する
+ヒストリを保存する目的で利用する。
+##1 index
+*/
+HistoryGet:
+	call _HistoryClipIndex #g_history_current_index + ##1;
+	return $g_histroy[##return];
+
+/*現在のヒストリを取得する
+*/
+HistoryGetCurrent:
+	return $g_histroy[#g_history_current_index];
+
+/*新規ヒストリを先頭に追加する
+$$1 設定する文字列
+*/
+HistoryInsertTop:
+	##top_index = #g_history_current_index - 1;
+	call _HistoryClipIndex ##top_index;
+	##top_index=##return;
+	#g_histroy[##top_index] = $$1;
+	#g_history_current_index=##top_index;
+	return;
+
+/*現在のヒストリを先頭に移動する。
+ヒストリを確定したときに利用する。
+*/
+HistoryMoveCurrentToTop:
+	$$current_history = $g_histroy[#g_history_current_index];
+	$g_histroy[#g_history_current_index] = "";
+	call HistoryInsertTop $$current_history;
+	return;
+
+/*同じヒストリを削除する
+$$1 ヒストリの文字列
+*/
+_HistoryRemoveEqual:
+	return;
+
+/*ヒストリのインデックスを範囲内にする
+*/
+_HistoryClipIndex:
+	##index = #g_history_top_index + ##1;
+	if(##index < #g_MAX_HISTORY_NUM){
+		return ##index;
+	}
+	return ##index - #g_MAX_HISTORY_NUM;
