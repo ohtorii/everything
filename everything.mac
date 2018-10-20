@@ -93,6 +93,12 @@ $g_search_pattern="";
 $g_old_searchbuffer = searchbuffer;
 #g_old_searchoption = searchoption;
 #g_old_hidemaru     = hidemaruhandle(0);
+if(true):
+	call HistroyInsertTestData;
+	call HistoryGetCurrent;
+	$g_search_pattern=$return;
+}
+
 call Main;
 setsearch $g_old_searchbuffer, #g_old_searchoption;
 endmacro;
@@ -147,7 +153,7 @@ LoadIni:
 	$g_argument_default 		= getinistr($g_ini_config_filename,"program","argument_default" 		);
 	$g_argument_regex			= getinistr($g_ini_config_filename,"program","argument_regex"			);
 	$g_option_match_full_path	= getinistr($g_ini_config_filename,"program","option_match_full_path"	);
-	$g_search_pattern			= getinistr($g_ini_config_filename,"history","input"					);
+	//$g_search_pattern			= getinistr($g_ini_config_filename,"history","input"					);
 	return true;
 
 
@@ -213,6 +219,14 @@ Start:
 				call ToggleMatchFullPathMode;
 				call UpdateDialogStatus;
 				call UpdateSearchWindow;
+			}else if(iskeydown(P)){
+				//<c-p>
+				call HistoryForward;
+				##n=dllfuncstr("SETCTRLSTRING", "Everything@Param", $$return);
+			}else if(iskeydown(N)){
+				//<c-n>
+				call HistoryBack;
+				##n=dllfuncstr("SETCTRLSTRING", "Everything@Param", $$return);
 			}else if(iskeydown(0x46)){
 				if(##shift){
 					//<c-s-f>
@@ -538,6 +552,19 @@ TrimString:
 #g_history_current_index=0; //現在のインデックス
 $g_histroy[0]="";			//ヒストリのリングバッファ
 
+/*
+   ヒストリのテストデータを作成する
+ */
+HistroyInsertTestData:
+$g_histroy[0]=".py";
+$g_histroy[1]=".txt";
+$g_histroy[2]="aeon .py";
+$g_histroy[3]="develop .txt";
+#g_history_top_index=0;
+#g_history_end_index=4;
+#g_history_current_index=0;
+return;
+
 /*ヒストリに文字列をセットする。
 ヒストリを初期化する目的で利用する。
 ##1	index
@@ -559,6 +586,20 @@ HistoryGet:
 */
 HistoryGetCurrent:
 	return $g_histroy[#g_history_current_index];
+
+/*ヒストリを一つ進める
+返値　一つ進めた先のヒストリ*/
+HistoryForward:
+	call _HistoryClipIndex 1;
+	call HistoryGetCurrent;
+	return $$return;
+
+	/*ヒストリを一つ戻す
+返値一つ戻した先のヒストリ*/
+HistoryBack:
+	call _HistoryClipIndex -1;
+	call HistoryGetCurrent;
+	return $$return;
 
 /*新規ヒストリを先頭に追加する
 $$1 設定する文字列
@@ -587,10 +628,13 @@ _HistoryRemoveEqual:
 	return;
 
 /*ヒストリのインデックスを範囲内にする
+##1 ヒストリのオフセット(1 or -1)
 */
 _HistoryClipIndex:
-	##index = #g_history_top_index + ##1;
-	if(##index < #g_MAX_HISTORY_NUM){
-		return ##index;
+	#g_history_current_index= #g_history_top_index + ##1;
+	if(#g_history_current_index	< #g_MAX_HISTORY_NUM){
+		return;
 	}
-	return ##index - #g_MAX_HISTORY_NUM;
+	g_history_current_index = #g_history_current_index - #g_MAX_HISTORY_NUM;
+
+
