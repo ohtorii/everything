@@ -206,7 +206,7 @@ Start:
 	call HistoryGetCurrent;
 	##n=dllfunc("SETCTRLSTRING", "Everything@Param", $$return);
 
-	debuginfo 1;
+	debuginfo 0;
 
 	//文字入力中に適度な間隔でファイル内容を更新する。
 	##interval			= 300;
@@ -663,7 +663,6 @@ IskeyDown:
 	デバッグ用のルーチン
 *****************************/
 Debug:
-	debuginfo 1;
 	//call HistroyInsertTestData;
 
 	//#g_history_current_index=3;

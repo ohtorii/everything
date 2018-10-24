@@ -8,47 +8,55 @@ execmacro "search_project_folder.mac" "c:\\my_project\\src\system\\heap";
 見つからない場合は空文字を返します。
 */
 
-$g_markers[0] = ".git";
-$g_markers[1] = ".hg";
-$g_markers[2] = ".svn";
-$g_markers[3] = ".bzr";
-$g_markers[4] = "_darcs";
-#g_markers_len= 5;
+$g_markers[0] = "";
+#g_markers_len=0;
 
+$g_ini_config_filename=currentmacrofilename+".config.ini";
 #g_dll 	= 0;
 
 
-
+debuginfo 0;
 call main;
 endmacro $$return;
 
 
 main:
+	if(! existfile($g_ini_config_filename)){
+		message "iniファイルが見つからない\n"+$g_ini_config_filename;
+		return false;
+	}
 	#g_dll=loaddll(hidemarudir+"\\ht_tools.dll");
 	if(#g_dll==0){
 		message "ht_tools.dll のロードに失敗しました\n" +
 				"ht_tools.dll が秀丸エディタのディレクトリに存在するか確認してください";
 		return false;
 	}
-	debuginfo 1;
 	
 	$$current_folder=getarg(0);
-	//$$current_folder="\\\\Users\\ikeuc_000\\Documents\\GitHub\\";
-	
-	call findroot $$current_folder;
-	$$project_folder=$$return;
-	
-	debuginfo "project_folder=" + $$project_folder;
-	
+	call start;
+	$$ret=$$return;
+
 	freedll(#g_dll);
 	#g_dll=0;
+	return $$ret;
+
+
+start:
+	call load_ini;
+	if(! ##return){
+		return "";
+	}
+	call findroot $$current_folder;
+	$$project_folder=$$return;
+
+	debuginfo "project_folder=" + $$project_folder;
 	return $$project_folder;
 
 
 findroot:
 	$$current_folder=$$1;
 	debuginfo "$$current_folder="+$$current_folder;
-	
+
 	##i=0;
 	while(##i < #g_markers_len){
 		$$sub_folder=$$current_folder+"\\"+$g_markers[##i];
@@ -61,7 +69,7 @@ findroot:
 		//"c:\" のパターン
 		return "";
 	}
-	
+
 	call getparent $$current_folder;
 	$$parent=$$return;
 	call findroot $$parent;
@@ -71,3 +79,18 @@ findroot:
 getparent:
 	$$parent = dllfuncstr(#g_dll, "GetParentFolder", $$1);
 	return $$parent;
+
+load_ini:
+	##i=0;
+	while(##i<100){
+		$$item = getinistr($g_ini_config_filename,"project_folder","_"+str(##i));
+		debuginfo "$$item="+$$item;
+		if($$item==""){
+			return true;
+		}
+		$g_markers[##i]=$$item;
+		#g_markers_len = #g_markers_len + 1;
+		
+		##i = ##i + 1;
+	}
+	return false;
