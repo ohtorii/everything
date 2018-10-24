@@ -75,7 +75,7 @@ $g_option_match_full_path	= "";
 *************************/
 //ダイアログに入力された検索パターン
 $g_search_pattern="";
-
+$g_NOTIFY_HELP="99";
 
 /*************************
 	検索ヒストリ
@@ -115,7 +115,7 @@ Main:
 		return false;
 	}
 	call SanitizeIni;
-	
+
 	call CheckEnvironment;
 	if(! ##return){
 		return false;
@@ -150,7 +150,7 @@ Main:
 	if(! ##result){
 		call CloseFileIfOpen;
 	}
-	
+
 	call WriteIni;
 	return ##result;
 
@@ -181,7 +181,7 @@ SanitizeIni:
 		#g_path_mode=0;
 	}
 	return;
-	
+
 
 WriteIni:
 	writeininum $g_ini_histry_filename, "setting", "match_full_path", #g_match_full_path;
@@ -234,6 +234,9 @@ Start:
 		}else if($$item=="1"){
 			//ok
 			break;
+		}else if($$item==$g_NOTIFY_HELP){
+			call ShowHelp;
+			continue;
 		}
 
 		//##shift=iskeydown(0x10);
@@ -416,15 +419,18 @@ UpdateDialogStatus:
 
 
 CreateDialog:
-	if (dllfunc("NEWDIALOG", "Everythingでファイルを検索するマクロ " + $g_version, 128) == 0 ||
-		dllfunc("NEWCONTROL", "text", "Everything@Status", "") == 0 ||
-		dllfunc("SETCTRLWIDTH", "", 10) == 0 ||
-		dllfunc("NEWCONTROL", "text", "Everything@SearchPath", "") == 0 ||
-		dllfunc("NEWCONTROL", "text", "", "検索(S)") == 0 ||
-		dllfunc("SETCTRLWIDTH", "", 8) == 0 ||
-		dllfunc("NEWCONTROL", "edit", "Everything@Param", "") == 0 ||
-		dllfunc("NEWCONTROL", "okcancel", "Everything@OkCancel", "") == 0)
-	{
+	if (dllfunc("NEWDIALOG", "Everythingでファイルを検索するマクロ " + $g_version, 128) == 0	||
+		dllfunc("NEWCONTROL", "text", "Everything@Status", "") == 0 							||
+		dllfunc("SETCTRLWIDTH", "", 10) == 0													||
+		dllfunc("NEWCONTROL", "text", "Everything@SearchPath", "") == 0 						||
+		dllfunc("NEWCONTROL", "text", "", "検索(S)") == 0										||
+		dllfunc("SETCTRLWIDTH", "", 8) == 0 													||
+		dllfunc("NEWCONTROL", "edit", "Everything@Param", "") == 0								||
+		dllfunc("NEWCONTROL", "okcancel", "Everything@OkCancel", "") == 0						||
+		dllfunc("NEWCONTROL", "button", "Everything@Help", "?") == 0							||
+		dllfunc("SETCTRLWIDTH", "", 8) == 0														||
+		dllfunc("SETCTRLNOTIFY","",$g_NOTIFY_HELP) == 0
+	){
 		message "ダイアログの作成に失敗しました\n";
 		return false;
 	}
@@ -612,13 +618,17 @@ TrimString:
 	return $$1;
 
 ShowHelp:
-message
-"<f1>           ヘルプ表示\n"+
-"<c-r>          正規表現への切り替え\n"+
-"<c-f>,<c-b>    検索パス切り替え\n"+
-"<c-d>          フルパス・ファイル名検索の切り替え\n"+
-"<c-n>,<c-p>    検索履歴を進める/戻す\n"+
-"<esc>,<c-c>    終了\n";
+	message
+	"<F1>                 ヘルプ表示\n"+
+	"<Ctrl-r>             正規表現の切り替え（トグル）\n"+
+	"<Ctrl-f>,<Ctrl-b>    検索パス切り替え\n"+
+	"<Ctrl-d>             フルパス・ファイル名検索の切り替え（トグル）\n"+
+	"<Ctrl-n>,<Ctrl-p>    検索履歴を進める/戻す\n"+
+	"<Enter>              確定\n"+
+	"<ESC>,<Ctrl-c>       終了\n"
+	, "ヘルプ"
+	, 0x20;
+
 	return;
 
 
