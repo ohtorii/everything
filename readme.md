@@ -54,13 +54,27 @@ zipファイル中の`es.exe`をEverythingをインストールしたフォル�
 操作方法はVIMの[ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)と概ね同じです。
 
 
-# カスタマイズ(everything.mac.config.ini)
+# カスタマイズ
+## everything.mac.config.ini
+マクロ本体のカスタマイズを行うことが出来ます。
+
 es.exeへのパスは必要に応じて書き換えてください。
 > command=C:\Program Files\Everything\es.exe
 
 マッチしたファイルの表示数を調整するには 100 の数値を書き換えてください。
 > argument_default=-s -n 100 %s 	<br>
 > argument_regex=-s -n 100 -r %s
+
+## everything_internal\search_project_folder.mac.config.ini
+プロジェクトディレクトリをカスタマイズできます。
+
+> [project_folder]	<br>
+> _0=.git	<br>
+> _1=.hg	<br>
+> _2=.svn	<br>
+> _3=.bzr	<br>
+> _4=_darcs	<br>
+
 
 # 注意事項
 本マクロが意図したとおりに動かないときはまず、Everythingが意図したとおりに動くかどうかを確認し原因の切り分けを行って下さい。
