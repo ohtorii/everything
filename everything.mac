@@ -11,6 +11,10 @@
 
 VIMのctrlp.vimと概ね同じです。
 
+＊動作確認を行った環境
+・秀丸エディタ ver 8.83 64bit
+・でんがくDLL Ver.3.20
+
 *連絡先
 https://github.com/ohtorii/everything
 http://d.hatena.ne.jp/ohtorii/

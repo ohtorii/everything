@@ -14,11 +14,11 @@
 
 # Everythingの導入方法
 ## Everythingのインストール
-（ステップ1）<br>
+### （ステップ1）
 まずは、[Everything本体](http://www.voidtools.com/)を公式サイトからダウンロードしてインストールして下さい。<br>
 インストール中のオプションは既定値で構いません。（後で設定することが出来ます）
 
-（ステップ2）<br>
+### （ステップ2）
 `es.exe`のインストール方法<br>
 次に、[Everything](http://www.voidtools.com/)から`ES-バージョン番号.zip`をダウンロードします。<br>
 zipファイル中の`es.exe`をEverythingをインストールしたフォルダへコピーして下さい。<br>
@@ -29,6 +29,8 @@ zipファイル中の`es.exe`をEverythingをインストールしたフォル�
 [最新版への直リン（2018年10月25日　現在）](https://www.voidtools.com/ES-1.1.0.10.zip)
 
 # 秀丸マクロの導入
+### （ステップ1）
+
 全ファイルを秀丸エディタのマクロファイル用のフォルダにコピーしてください。<br>
 `everything.mac`マクロにキーを割り当ててご使用下さい。<br>
 
@@ -39,6 +41,10 @@ zipファイル中の`es.exe`をEverythingをインストールしたフォル�
 	    └─everything_internal
 	        ├─search_project_folder.mac
 	        └─search_project_folder.mac.config.ini
+
+### （ステップ2）
+[でんがくDLL](http://www.ceres.dti.ne.jp/~sugiura/)を秀丸エディタにインストールして下さい。<br>
+ダイアログを表示するために必要なDLLです。
 
 # 操作方法
 |ショートカットキー|機能|
@@ -93,6 +99,7 @@ es.exeへのパスは必要に応じて書き換えてください。
 # 動作確認を行った環境
 - Windows 10 64bit
 - 秀丸エディタ ver 8.83 64bit
+- でんがくDLL Ver.3.20 64bit
 - [Everything ver 1.4.1895(x64)](http://www.voidtools.com/)
 - [ES.exe ver 1.1.0.10](http://www.voidtools.com/)
 
