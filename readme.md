@@ -3,23 +3,30 @@
 
 # はじめに
 秀丸エディタでファイル検索を高速に行う目的で、ファイル検索ソフトの[Everything](http://www.voidtools.com/)を利用するマクロを書きました。<br>
-秀丸エディタから一瞬たりとも抜けたくない方のマクロです。
+秀丸エディタから一瞬たりとも抜けたくない方向けのマクロです。
 
 ### そもそもEverythingとは何？
 [窓の杜の記事](https://forest.watch.impress.co.jp/docs/serial/winbasic2018/1125142.html)を参照して下さい。
 
 ## 動作イメージ
-あとで
+![動作イメージ](everything.gif "動作イメージ")
+
 
 # Everythingの導入方法
 ## Everythingのインストール
-まずは、[Everything](http://www.voidtools.com/)をダウンロードしてインストールして下さい。<br>
-インストール中のオプションは既定値で構いません。（後で設定することも出来ます）
+（ステップ1）<br>
+まずは、[Everything本体](http://www.voidtools.com/)を公式サイトからダウンロードしてインストールして下さい。<br>
+インストール中のオプションは既定値で構いません。（後で設定することが出来ます）
 
-`es.exe`のインストール<br>
-次に、[Everything](http://www.voidtools.com/)から`es.zip`をダウンロードします。<br>
+（ステップ2）<br>
+`es.exe`のインストール方法<br>
+次に、[Everything](http://www.voidtools.com/)から`ES-バージョン番号.zip`をダウンロードします。<br>
 zipファイル中の`es.exe`をEverythingをインストールしたフォルダへコピーして下さい。<br>
-  (例)C:\Program Files\Everything\es.exe
+
+	 (例)
+	 C:\Program Files\Everything\es.exe
+
+[最新版への直リン（2018年10月25日　現在）](https://www.voidtools.com/ES-1.1.0.10.zip)
 
 # 秀丸マクロの導入
 全ファイルを秀丸エディタのマクロファイル用のフォルダにコピーしてください。<br>
@@ -30,7 +37,8 @@ zipファイル中の`es.exe`をEverythingをインストールしたフォル�
 	    ├─everything.mac
 	    ├─everything.mac.config.ini
 	    └─everything_internal
-	        └─search_project_folder.mac
+	        ├─search_project_folder.mac
+	        └─search_project_folder.mac.config.ini
 
 # 操作方法
 |ショートカットキー|機能|
@@ -43,7 +51,10 @@ zipファイル中の`es.exe`をEverythingをインストールしたフォル�
 |Ctrl-c,esc|キャンセルして終了|
 |enter|確定して終了|
 
-## カスタマイズ(everything.mac.config.ini)
+操作方法はVIMの[ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)と概ね同じです。
+
+
+# カスタマイズ(everything.mac.config.ini)
 es.exeへのパスは必要に応じて書き換えてください。
 > command=C:\Program Files\Everything\es.exe
 
@@ -56,7 +67,10 @@ es.exeへのパスは必要に応じて書き換えてください。
 
 # 更新履歴
 ### 2018/10/08	v2.0.0 
-＜＜＜＜後で書く＞＞＞＞
+ファイルを高速に見付けるために全て作り直しました。
+- リアルタイムで絞り込み検索が出来るようにしました。
+- その他機能は操作方法を参照して下さい。
+
 ### 2014/09/15	v1.0.1
 コメントの編集
 ### 2014/05/10	v1.0.0 
