@@ -49,7 +49,7 @@ SOFTWARE.
 	定義
 *****************************************************************************/
 //バージョン番号
-$g_version 		= "version 2.0.0(2018/10/25)";
+$g_version 		= "version 2.0.2(2018/10/27)";
 
 
 $dengaku_dll 	= hidemarudir + "\\DengakuDLL.dll";
@@ -244,10 +244,14 @@ Start:
 	while (1) {
 		##current_tick = tickcount;
 		if(##interval < (##current_tick - ##prev_tick)){
-			$g_search_pattern = dllfuncstr("GETCTRLSTRING", "Everything@Param");
-
-			call TrimString $g_search_pattern;
-			$g_search_pattern=$$return;
+			$$input = dllfuncstr("GETCTRLSTRING", "Everything@Param");
+			if(#g_search_mode==#g_SEARCH_DEFAULT){
+				call TrimString $$input;
+				$g_search_pattern=$$return;
+			}else{
+				//正規表現は空白も検索対象なので空白文字をtrimしない。
+				$g_search_pattern=$$input;
+			}
 
 			if($g_search_pattern != $$prev_search_pattern){
 				call UpdateSearchWindow;
