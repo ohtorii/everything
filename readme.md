@@ -86,8 +86,8 @@ es.exeへのパスは必要に応じて書き換えてください。
 本マクロが意図したとおりに動かないときはまず、Everythingが意図したとおりに動くかどうかを確認し原因の切り分けを行って下さい。
 
 # 更新履歴
-### ????/??/?? ver 3.0.0(Next Version)
-The Silver Searcher/The Platinum Searcher/ripgrepなどの高速grep-toolへ対応中です。
+### ????/??/?? ver ?.?.?(Next Version)
+後で書く
 
 ### 2018/10/27 ver 2.0.3
 v2.0.2の対応が不十分でした、更に修正しました。
