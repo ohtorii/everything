@@ -131,9 +131,10 @@ $g_old_searchbuffer = searchbuffer;
 	call Debug;
 	endmacro;
 }*/
-
+disablebreak;
 call Main;
 setsearch $g_old_searchbuffer, #g_old_searchoption;
+enablebreak;
 endmacro;
 
 
