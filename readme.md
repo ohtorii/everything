@@ -9,7 +9,7 @@
 [窓の杜の記事](https://forest.watch.impress.co.jp/docs/serial/winbasic2018/1125142.html)を参照して下さい。
 
 ## 動作イメージ
-![動作イメージ](everything.gif "動作イメージ")
+![動作イメージ](images\everything.gif "動作イメージ")
 
 
 # Everythingの導入方法
