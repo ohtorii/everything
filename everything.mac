@@ -49,7 +49,7 @@ SOFTWARE.
 	定義
 *****************************************************************************/
 //バージョン番号
-$g_version 		= "version 3.0.0(alpha)";
+$g_version 		= "version 2.1.0";
 
 
 #g_hmjre_dll 	= 0;
@@ -159,10 +159,8 @@ Main:
 	if (!##return) {
 		return false;
 	}
-	#g_hmjre_dll=loaddll("HmJre.dll");
-	if(#g_hmjre_dll==0){
-		message "HmJre.dll のロードに失敗しました\n" +
-				+ "HmJre.dllが秀丸エディタのディレクトリに存在するか確認してください";
+	call LoadHmJReDll;
+	if (!##return) {
 		return false;
 	}
 
@@ -192,7 +190,22 @@ LoadDengakuDll:
 	}
 	message "田楽DLLのロードに失敗しました\n" + "DengakuDLL.dllが秀丸マクロディレクトリに存在するか確認してください";
 	return false;
+
+LoadHmJReDll:
+	#g_hmjre_dll=loaddll(macrodir + "\\HmJre.dll");
+	if(#g_hmjre_dll){
+		return true;
+	}
 	
+	#g_hmjre_dll=loaddll(hidemarudir + "\\HmJre.dll");
+	if(#g_hmjre_dll){
+		return true;
+	}
+	message "HmJre.dll のロードに失敗しました\n" +
+				+ "HmJre.dllが秀丸エディタのディレクトリに存在するか確認してください";
+		return false;
+	return false;
+
 LoadIni:
 	$g_exe						= getinistr($g_ini_config_filename,"program","command"					);
 	$g_argument_default 		= getinistr($g_ini_config_filename,"program","argument_default" 		);
@@ -478,7 +491,7 @@ CreateDialog:
 	}
 	call UpdateDialogStatus;
 	// ダイアログの表示
-	##n = dllfunc("SHOWDIALOG", 0, 0);
+	##n = dllfunc("SHOWDIALOG", hidemaruhandle(0), 0);
 	return true;
 
 
