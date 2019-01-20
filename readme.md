@@ -2,23 +2,29 @@
 ========
 
 # はじめに
+
 秀丸エディタでファイル検索を高速に行う目的で、ファイル検索ソフトの[Everything](http://www.voidtools.com/)を利用するマクロを書きました。<br>
 秀丸エディタから一瞬たりとも抜けたくない方向けのマクロです。
 
 ### そもそもEverythingとは何？
+
 [窓の杜の記事](https://forest.watch.impress.co.jp/docs/serial/winbasic2018/1125142.html)を参照して下さい。
 
 ## 動作イメージ
-![動作イメージ](images\everything.gif "動作イメージ")
+
+![動作イメージ](images/everything.gif "動作イメージ")
 
 
 # Everythingの導入方法
+
 ## Everythingのインストール
+
 ### （ステップ1）
 まずは、[Everything本体](http://www.voidtools.com/)を公式サイトからダウンロードしてインストールして下さい。<br>
 インストール中のオプションは既定値で構いません。（後で設定することが出来ます）
 
 ### （ステップ2）
+
 `es.exe`のインストール方法<br>
 次に、[Everything](http://www.voidtools.com/)から`ES-バージョン番号.zip`をダウンロードします。<br>
 zipファイル中の`es.exe`をEverythingをインストールしたフォルダへコピーして下さい。<br>
@@ -29,6 +35,7 @@ zipファイル中の`es.exe`をEverythingをインストールしたフォル�
 [最新版への直リン（2018年10月25日　現在）](https://www.voidtools.com/ES-1.1.0.10.zip)
 
 # 秀丸マクロの導入
+
 ### （ステップ1）
 
 全ファイルを秀丸エディタのマクロファイル用のフォルダにコピーしてください。<br>
@@ -43,10 +50,12 @@ zipファイル中の`es.exe`をEverythingをインストールしたフォル�
 	        └─search_project_folder.mac.config.ini
 
 ### （ステップ2）
+
 [でんがくDLL](http://www.ceres.dti.ne.jp/~sugiura/)を秀丸エディタにインストールして下さい。<br>
 ダイアログを表示するために必要なDLLです。
 
 # 操作方法
+
 |ショートカットキー|機能|
 |:---|:---|
 |F1|ヘルプ表示|
@@ -61,7 +70,9 @@ zipファイル中の`es.exe`をEverythingをインストールしたフォル�
 
 
 # カスタマイズ
+
 ## everything.mac.config.ini
+
 マクロ本体のカスタマイズを行うことが出来ます。
 
 es.exeへのパスは必要に応じて書き換えてください。
@@ -72,6 +83,7 @@ es.exeへのパスは必要に応じて書き換えてください。
 > argument_regex=-s -n 100 -r %s
 
 ## everything_internal\search_project_folder.mac.config.ini
+
 プロジェクトディレクトリをカスタマイズできます。
 
 > [project_folder]	<br>
@@ -83,34 +95,44 @@ es.exeへのパスは必要に応じて書き換えてください。
 
 
 # 注意事項
+
 本マクロが意図したとおりに動かないときはまず、Everythingが意図したとおりに動くかどうかを確認し原因の切り分けを行って下さい。
 
 # 更新履歴
+
 ### 2019/01/20 ver 2.0.4
+
 - エスケープキーを連打したときにマクロを終了するかどうかをユーザーに問い合わせていましたが、今回から問い合わせないようにしました。
 - ダイアログを秀丸エディタの裏側に隠れることがあったので常に前面に表示するようにしました。
 
 ### 2018/10/27 ver 2.0.3
+
 v2.0.2の対応が不十分でした、更に修正しました。
 
 ### 2018/10/27 ver 2.0.2
+
 正規表現の検索結果をEverythingのGUI版と同じになるように修正しました。
 
 ### 2018/10/25 ver 2.0.1
+
 説明文を修正。
 
 ### 2018/10/08	v2.0.0 
+
 ファイルを高速に見付けるために全て作り直しました。
 - リアルタイムで絞り込み検索が出来るようにしました。
 - その他機能は操作方法を参照して下さい。
 
 ### 2014/09/15	v1.0.1
+
 コメントの編集
 
 ### 2014/05/10	v1.0.0 
+
 公開
 
 # 動作確認を行った環境
+
 - Windows 10 64bit
 - 秀丸エディタ ver 8.83 64bit
 - でんがくDLL Ver.3.20 64bit
@@ -118,9 +140,11 @@ v2.0.2の対応が不十分でした、更に修正しました。
 - [ES.exe ver 1.1.0.10](http://www.voidtools.com/)
 
 # リンク
+
 [Everything](http://www.voidtools.com/)
 
 # 連絡先
-<http://d.hatena.ne.jp/ohtorii/> <br>
+
+<https://ohtorii.hatenadiary.jp/> <br>
 <https://github.com/ohtorii/everything> <br>
 <https://twitter.com/ohtorii>
