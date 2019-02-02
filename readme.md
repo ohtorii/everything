@@ -42,12 +42,14 @@ zipファイル中の`es.exe`をEverythingをインストールしたフォル�
 `everything.mac`マクロにキーを割り当ててご使用下さい。<br>
 
 ## コピー後のフォルダ構成
-	└─hidemaru-macro-folder
-	    ├─everything.mac
-	    ├─everything.mac.config.ini
-	    └─everything_internal
-	        ├─search_project_folder.mac
-	        └─search_project_folder.mac.config.ini
+
+    └─hidemaru-macro-folder
+        └─everything
+            ├─everything.mac
+            ├─everything.mac.config.ini
+            └─everything_internal
+                ├─search_project_folder.mac
+                └─search_project_folder.mac.config.ini
 
 ### （ステップ2）
 
@@ -59,11 +61,12 @@ zipファイル中の`es.exe`をEverythingをインストールしたフォル�
 |ショートカットキー|機能|
 |:---|:---|
 |F1|ヘルプ表示|
-|Ctrl-r|「通常の検索モード、正規表現」の切り替え|
-|Ctrl-f,Ctrl-b|検索パス（通常、プロジェクトフォルダ、カレントフォルダ）の切り替え|
-|Ctrl-d|フルパス、ファイル名検索の切り替え|
-|Ctrl-n,Ctrl-p|検索履歴を進める/戻す|
-|Ctrl-c,esc|キャンセルして終了|
+|Ctrl+r|「通常の検索モード、正規表現」の切り替え|
+|Ctrl+f,Ctrl-b|検索パス（通常、プロジェクトフォルダ、カレントフォルダ）の切り替え|
+|Ctrl+d|フルパス、ファイル名検索の切り替え|
+|Ctrl+n,Ctrl-p|検索履歴を進める/戻す|
+|Ctrl+1 ～ Ctrl-9|検索履歴を選択します|
+|Ctrl+c,esc|キャンセルして終了|
 |enter|確定して終了|
 
 操作方法はVIMの[ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)と概ね同じです。
@@ -106,7 +109,7 @@ https://github.com/ohtorii/everything/releases
 
 *注意*
 masterブランチを取得しても多分動作しないです。<br>
-私が一人で開発しているのでブランチを作らずに気楽に開発してます。
+一人で開発しているのでブランチを作らずに気楽に開発してます。（仕事じゃないしね😉）
 
 
 # 更新履歴
@@ -115,7 +118,9 @@ masterブランチを取得しても多分動作しないです。<br>
 
 - ショートカットの操作方法をわかりやすくする目的でGUIのレイアウトを変更しました。
 	- このマクロを久しぶりに利用するとショートカットキーが分からず思ったとおりに操作できないのが理由です。
-- ALT-Sキーで検索ボックスにフォーカスが移るようにしました。
+- キーボードショートカットの追加
+	- 「Alt+Sキー・Ctrl+Sキー」で検索ボックスに移動できるようにしました。
+	- Ctrl+1～Ctrl+9キーで検索履歴を選択できるようにしました。
 
 ### 2019/01/20 ver 2.0.4
 
@@ -136,9 +141,9 @@ v2.0.2の対応が不十分でした、更に修正しました。
 
 ### 2018/10/08	v2.0.0 
 
-ファイルを高速に見付けるために全て作り直しました。
-- リアルタイムで絞り込み検索が出来るようにしました。
-- その他機能は操作方法を参照して下さい。
+- ファイルを高速に見付けるために全て作り直しました。
+	- リアルタイムで絞り込み検索が出来るようにしました。
+	- その他機能は操作方法を参照して下さい。
 
 ### 2014/09/15	v1.0.1
 
