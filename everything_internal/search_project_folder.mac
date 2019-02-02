@@ -1,20 +1,20 @@
-/*�v���W�F�N�g�t�H���_��T��
+﻿/*プロジェクトフォルダを探す
 
-�i���p��j
+（利用例）
 execmacro "search_project_folder.mac" "c:\\my_project\\src\system\\heap";
 
-�i�}�N���̕Ԓl�j
-�v���W�F�N�g���[�g�̃t�H���_��������Ƃ��̕������Ԃ��܂��A
-������Ȃ��ꍇ�͋󕶎���Ԃ��܂��B
+（マクロの返値）
+プロジェクトルートのフォルダを見つけるとその文字列を返します、
+見つからない場合は空文字を返します。
 
-�i�⑫�j
-�����A���́u�v���W�F�N�g�t�H���_��T���v�}�N�����C�ɓ�������A
-�������̃}�N���ɑg�ݍ���ŗ��p���Ē����č\���܂���B
-���̎��́A�}�N���̃t�@�C�������Փ˂��Ȃ��悤�Ƀt�@�C������ύX����
-�ȂǋC�����Ă��������B
+（補足）
+もし、この「プロジェクトフォルダを探す」マクロが気に入ったら、
+ご自分のマクロに組み込んで利用して頂いて構いません。
+その時は、マクロのファイル名が衝突しないようにファイル名を変更する
+など気をつけてください。
 
 
-�i���C�Z���X�j
+（ライセンス）
 MIT License
 
 Copyright (c) 2018 ohtorii
@@ -52,13 +52,13 @@ endmacro $$return;
 
 main:
 	if(! existfile($g_ini_config_filename)){
-		message "ini�t�@�C����������Ȃ�\n"+$g_ini_config_filename;
+		message "iniファイルが見つからない\n"+$g_ini_config_filename;
 		return false;
 	}
 	#g_dll=loaddll(hidemarudir+"\\ht_tools.dll");
 	if(#g_dll==0){
-		message "ht_tools.dll �̃��[�h�Ɏ��s���܂���\n" +
-				"ht_tools.dll ���G�ۃG�f�B�^�̃f�B���N�g���ɑ��݂��邩�m�F���Ă�������";
+		message "ht_tools.dll のロードに失敗しました\n" +
+				"ht_tools.dll が秀丸エディタのディレクトリに存在するか確認してください";
 		return false;
 	}
 	
@@ -96,7 +96,7 @@ findroot:
 		##i = ##i + 1;
 	}
 	if(strlen($$current_folder) <= 3){
-		//"c:\" �̃p�^�[��
+		//"c:\" のパターン
 		return "";
 	}
 

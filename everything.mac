@@ -1,26 +1,26 @@
-/* GŠÛƒGƒfƒBƒ^‚©‚çEverything‚ğg—p‚·‚éƒ}ƒNƒB
+ï»¿/* ç§€ä¸¸ã‚¨ãƒ‡ã‚£ã‚¿ã‹ã‚‰Everythingã‚’ä½¿ç”¨ã™ã‚‹ãƒã‚¯ãƒ­ã€‚
 
-–‘€ì•û–@
-E<f1>          ƒwƒ‹ƒv•\¦
-E<c-r>         u’Êí‚ÌŒŸõƒ‚[ƒhA³‹K•\Œ»v‚ÌØ‚è‘Ö‚¦
-E<c-f>,<c-b>   ŒŸõƒpƒXØ‚è‘Ö‚¦i’ÊíAƒvƒƒWƒFƒNƒgƒfƒBƒŒƒNƒgƒŠAƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠj
-E<c-d>         ƒtƒ‹ƒpƒXŒŸõƒ‚[ƒh‚Æƒtƒ@ƒCƒ‹–¼‚Ì‚İ‚ÌŒŸõƒ‚[ƒh‚ğØ‚è‘Ö‚¦
-E<c-p>,<c-n>   ŒŸõ—š—ğ‚ğ’H‚é
-E<esc>,<c-c>   ƒLƒƒƒ“ƒZƒ‹‚µ‚ÄI—¹
-E<enter>       Šm’è‚µ‚ÄI—¹
+ï¼Šæ“ä½œæ–¹æ³•
+ãƒ»<f1>          ãƒ˜ãƒ«ãƒ—è¡¨ç¤º
+ãƒ»<c-r>         ã€Œé€šå¸¸ã®æ¤œç´¢ãƒ¢ãƒ¼ãƒ‰ã€æ­£è¦è¡¨ç¾ã€ã®åˆ‡ã‚Šæ›¿ãˆ
+ãƒ»<c-f>,<c-b>   æ¤œç´¢ãƒ‘ã‚¹åˆ‡ã‚Šæ›¿ãˆï¼ˆé€šå¸¸ã€ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã€ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªï¼‰
+ãƒ»<c-d>         ãƒ•ãƒ«ãƒ‘ã‚¹æ¤œç´¢ãƒ¢ãƒ¼ãƒ‰ã¨ãƒ•ã‚¡ã‚¤ãƒ«åã®ã¿ã®æ¤œç´¢ãƒ¢ãƒ¼ãƒ‰ã‚’åˆ‡ã‚Šæ›¿ãˆ
+ãƒ»<c-p>,<c-n>   æ¤œç´¢å±¥æ­´ã‚’è¾¿ã‚‹
+ãƒ»<esc>,<c-c>   ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã—ã¦çµ‚äº†
+ãƒ»<enter>       ç¢ºå®šã—ã¦çµ‚äº†
 
-VIM‚Ìctrlp.vim‚ÆŠT‚Ë“¯‚¶‚Å‚·B
+VIMã®ctrlp.vimã¨æ¦‚ã­åŒã˜ã§ã™ã€‚
 
-–“®ìŠm”F‚ğs‚Á‚½ŠÂ‹«
-EGŠÛƒGƒfƒBƒ^ ver 8.83 64bit
-E‚Å‚ñ‚ª‚­DLL Ver.3.20
+ï¼Šå‹•ä½œç¢ºèªã‚’è¡Œã£ãŸç’°å¢ƒ
+ãƒ»ç§€ä¸¸ã‚¨ãƒ‡ã‚£ã‚¿ ver 8.83 64bit
+ãƒ»ã§ã‚“ãŒãDLL Ver.3.20
 
-*˜A—æ
+*é€£çµ¡å…ˆ
 https://github.com/ohtorii/everything
 http://d.hatena.ne.jp/ohtorii/
 https://twitter.com/ohtorii
 
-–ƒ‰ƒCƒZƒ“ƒX
+ï¼Šãƒ©ã‚¤ã‚»ãƒ³ã‚¹
 MIT License
 
 Copyright (c) 2018 ohtorii
@@ -46,9 +46,9 @@ SOFTWARE.
 
 
 /*****************************************************************************
-	’è‹`
+	å®šç¾©
 *****************************************************************************/
-//ƒo[ƒWƒ‡ƒ“”Ô†
+//ãƒãƒ¼ã‚¸ãƒ§ãƒ³ç•ªå·
 $g_version 		= "version 2.1.0";
 
 
@@ -57,25 +57,25 @@ $g_version 		= "version 2.1.0";
 #g_new_hidemaru	= 0;
 #g_old_hidemaru	= 0;
 
-//ŒŸõ‚·‚éƒtƒ@ƒCƒ‹ƒpƒX
+//æ¤œç´¢ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹
 $g_path_current=directory2;
 execmacro currentmacrodirectory+"\\everything_internal\\search_project_folder.mac", filename2;
 $g_path_project=getresultex(-1);
 
-//‹ó”’•¶š‚Ì’è‹`
-$g_space="\r\n\t @";
+//ç©ºç™½æ–‡å­—ã®å®šç¾©
+$g_space="\r\n\t ã€€";
 
 /*************************
-	Šeíƒ‚[ƒh
+	å„ç¨®ãƒ¢ãƒ¼ãƒ‰
 *************************/
-/*ŒŸõƒ‚[ƒh*/
+/*æ¤œç´¢ãƒ¢ãƒ¼ãƒ‰*/
 #g_SEARCH_DEFAULT	=0;
 #g_SEARCH_REGEX		=1;
 #g_search_mode		=#g_SEARCH_DEFAULT;
-/*ƒtƒ‹ƒpƒX–¼ƒ}ƒbƒ`‚·‚é‚©‚Ç‚¤‚©*/
+/*ãƒ•ãƒ«ãƒ‘ã‚¹åãƒãƒƒãƒã™ã‚‹ã‹ã©ã†ã‹*/
 #g_match_full_path	= true;
 
-/*ŒŸõ‚·‚éƒtƒ@ƒCƒ‹ƒpƒX‚Ìƒ‚[ƒh*/
+/*æ¤œç´¢ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã®ãƒ¢ãƒ¼ãƒ‰*/
 #g_PATH_MODE_NONE		= 0;
 #g_PATH_MODE_CURRENT	= 1;
 #g_PATH_MODE_PROJECT	= 2;
@@ -83,45 +83,45 @@ $g_space="\r\n\t @";
 #g_path_mode			= #g_PATH_MODE_NONE;
 
 /*************************
-	iniƒtƒ@ƒCƒ‹‚Ìİ’è
+	iniãƒ•ã‚¡ã‚¤ãƒ«ã®è¨­å®š
 *************************/
 $g_ini_config_filename = currentmacrofilename + ".config.ini";
 $g_ini_histry_filename = currentmacrofilename + ".history.ini";
 
 
 /*************************
-	Àsƒtƒ@ƒCƒ‹‚Ìİ’è
+	å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«ã®è¨­å®š
 **************************/
-/* es.exe ‚Ö‚ÌƒpƒX */
+/* es.exe ã¸ã®ãƒ‘ã‚¹ */
 $g_exe 						= "";
 $g_argument_default			= "";
 $g_argument_regex			= "";
 $g_option_match_full_path	= "";
 
 /*************************
-ƒ_ƒCƒAƒƒOŠÖŒW
+ãƒ€ã‚¤ã‚¢ãƒ­ã‚°é–¢ä¿‚
 *************************/
-//ƒ_ƒCƒAƒƒO‚É“ü—Í‚³‚ê‚½ŒŸõƒpƒ^[ƒ“
+//ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã«å…¥åŠ›ã•ã‚ŒãŸæ¤œç´¢ãƒ‘ã‚¿ãƒ¼ãƒ³
 $g_search_pattern="";
 $g_NOTIFY_HELP="99";
 
 /*************************
-	ŒŸõƒqƒXƒgƒŠ
+	æ¤œç´¢ãƒ’ã‚¹ãƒˆãƒª
 /*************************/
-#g_MAX_HISTORY_NUM		=9;				//ƒqƒXƒgƒŠ‚ÌÅ‘å”
-#g_history_num			=0;				//ÅŒã‚ÌƒCƒ“ƒfƒbƒNƒX
-#g_history_current_index=0; 			//Œ»İ‚ÌƒCƒ“ƒfƒbƒNƒX
-$g_histroy[0]			="";			//ƒqƒXƒgƒŠ‚ÌƒŠƒ“ƒOƒoƒbƒtƒ@
+#g_MAX_HISTORY_NUM		=9;				//ãƒ’ã‚¹ãƒˆãƒªã®æœ€å¤§æ•°
+#g_history_num			=0;				//æœ€å¾Œã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+#g_history_current_index=0; 			//ç¾åœ¨ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+$g_histroy[0]			="";			//ãƒ’ã‚¹ãƒˆãƒªã®ãƒªãƒ³ã‚°ãƒãƒƒãƒ•ã‚¡
 
 
 /*************************
-	ƒL[‚Ì‰Ÿ‰º”»’è
+	ã‚­ãƒ¼ã®æŠ¼ä¸‹åˆ¤å®š
 *************************/
 #g_IsKeyDown[0]=false;
 
 
 /*****************************************************************************
-	ƒƒCƒ“ˆ—
+	ãƒ¡ã‚¤ãƒ³å‡¦ç†
 *****************************************************************************/
 $g_old_searchbuffer = searchbuffer;
 #g_old_searchoption = searchoption;
@@ -188,7 +188,7 @@ LoadDengakuDll:
 	if (result) {
 		return true;
 	}
-	message "“cŠyDLL‚Ìƒ[ƒh‚É¸”s‚µ‚Ü‚µ‚½\n" + "DengakuDLL.dll‚ªGŠÛƒ}ƒNƒƒfƒBƒŒƒNƒgƒŠ‚É‘¶İ‚·‚é‚©Šm”F‚µ‚Ä‚­‚¾‚³‚¢";
+	message "ç”°æ¥½DLLã®ãƒ­ãƒ¼ãƒ‰ã«å¤±æ•—ã—ã¾ã—ãŸ\n" + "DengakuDLL.dllãŒç§€ä¸¸ãƒã‚¯ãƒ­ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«å­˜åœ¨ã™ã‚‹ã‹ç¢ºèªã—ã¦ãã ã•ã„";
 	return false;
 
 LoadHmJReDll:
@@ -201,8 +201,8 @@ LoadHmJReDll:
 	if(#g_hmjre_dll){
 		return true;
 	}
-	message "HmJre.dll ‚Ìƒ[ƒh‚É¸”s‚µ‚Ü‚µ‚½\n" +
-				+ "HmJre.dll‚ªGŠÛƒGƒfƒBƒ^‚ÌƒfƒBƒŒƒNƒgƒŠ‚É‘¶İ‚·‚é‚©Šm”F‚µ‚Ä‚­‚¾‚³‚¢";
+	message "HmJre.dll ã®ãƒ­ãƒ¼ãƒ‰ã«å¤±æ•—ã—ã¾ã—ãŸ\n" +
+				+ "HmJre.dllãŒç§€ä¸¸ã‚¨ãƒ‡ã‚£ã‚¿ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«å­˜åœ¨ã™ã‚‹ã‹ç¢ºèªã—ã¦ãã ã•ã„";
 		return false;
 	return false;
 
@@ -242,8 +242,8 @@ WriteIni:
 
 Start:
 	/*
-	return 	true	ƒ†[ƒU[‚ÍŒŸõŒ‹‰Ê‚ğó‚¯“ü‚ê‚½
-			false	ƒ†[ƒU[‚ÍŒŸõŒ‹‰Ê‚ğ‹‘”Û‚µ‚½A–”‚ÍAˆ—¸”s
+	return 	true	ãƒ¦ãƒ¼ã‚¶ãƒ¼ã¯æ¤œç´¢çµæœã‚’å—ã‘å…¥ã‚ŒãŸ
+			false	ãƒ¦ãƒ¼ã‚¶ãƒ¼ã¯æ¤œç´¢çµæœã‚’æ‹’å¦ã—ãŸã€åˆã¯ã€å‡¦ç†å¤±æ•—
 	*/
 	call HistoryLoad;
 	call HistoryGetCurrent;
@@ -264,22 +264,22 @@ Start:
 	##n = dllfunc("ENDDIALOG");
 
 	if($$item=="0"){
-		//ƒ†[ƒU[‚Íƒtƒ@ƒCƒ‹ŒŸõ‚ğƒLƒƒƒ“ƒZƒ‹‚µ‚½‚Ì‚ÅŒŸõƒEƒCƒ“ƒhƒE‚ğŠJ‚¢‚Ä‚¢‚ê‚Î•Â‚¶‚éB
+		//ãƒ¦ãƒ¼ã‚¶ãƒ¼ã¯ãƒ•ã‚¡ã‚¤ãƒ«æ¤œç´¢ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã—ãŸã®ã§æ¤œç´¢ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’é–‹ã„ã¦ã„ã‚Œã°é–‰ã˜ã‚‹ã€‚
 		return false;
 	}else if ($$item == "1"){
-		//ƒ†[ƒU[‚Íƒtƒ@ƒCƒ‹ŒŸõ‚ÌŒ‹‰Ê‚ğó‚¯“ü‚ê‚½‚Ì‚ÅŒŸõƒEƒCƒ“ƒhƒE‚ğ‚»‚Ì‚Ü‚Ü‚É‚·‚éB
+		//ãƒ¦ãƒ¼ã‚¶ãƒ¼ã¯ãƒ•ã‚¡ã‚¤ãƒ«æ¤œç´¢ã®çµæœã‚’å—ã‘å…¥ã‚ŒãŸã®ã§æ¤œç´¢ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’ãã®ã¾ã¾ã«ã™ã‚‹ã€‚
 		if($g_search_pattern!=""){
 			call HistoryInsertTop $g_search_pattern;
 			call HistorySave;
 		}
 		return true;
 	}
-	//”O‚Ì‚½‚ßƒEƒCƒ“ƒhƒE‚ğŠJ‚¢‚½‚Ü‚Ü‚É‚·‚é
+	//å¿µã®ãŸã‚ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’é–‹ã„ãŸã¾ã¾ã«ã™ã‚‹
 	return true;
 
 
 MainLoop:
-	//•¶š“ü—Í’†‚É“K“x‚ÈŠÔŠu‚Åƒtƒ@ƒCƒ‹“à—e‚ğXV‚·‚éB
+	//æ–‡å­—å…¥åŠ›ä¸­ã«é©åº¦ãªé–“éš”ã§ãƒ•ã‚¡ã‚¤ãƒ«å†…å®¹ã‚’æ›´æ–°ã™ã‚‹ã€‚
 	##interval			= 300;
 	##prev_tick 		= 0;
 	$$prev_search_pattern="";
@@ -291,7 +291,7 @@ MainLoop:
 				call TrimString $$input;
 				$g_search_pattern=$$return;
 			}else{
-				//³‹K•\Œ»‚Í‹ó”’‚àŒŸõ‘ÎÛ‚È‚Ì‚Å‹ó”’•¶š‚ğtrim‚µ‚È‚¢B
+				//æ­£è¦è¡¨ç¾ã¯ç©ºç™½ã‚‚æ¤œç´¢å¯¾è±¡ãªã®ã§ç©ºç™½æ–‡å­—ã‚’trimã—ãªã„ã€‚
 				$g_search_pattern=$$input;
 			}
 
@@ -304,7 +304,7 @@ MainLoop:
 
 		$$item = dllfuncstr("WAITCTRLNOTIFY",10);
 		if($$item=="0"){
-			//ƒLƒƒƒ“ƒZƒ‹
+			//ã‚­ãƒ£ãƒ³ã‚»ãƒ«
 			break;
 		}else if($$item=="1"){
 			//ok
@@ -450,7 +450,7 @@ ToggleSearchMode:
 
 SwitchPathMode:
 	if(##1){
-		//³‡
+		//æ­£é †
 		if(#g_path_mode == #g_PATH_MODE_NONE){
 			#g_path_mode=#g_PATH_MODE_CURRENT;
 		}else if(#g_path_mode == #g_PATH_MODE_CURRENT){
@@ -459,7 +459,7 @@ SwitchPathMode:
 			#g_path_mode=#g_PATH_MODE_NONE;
 		}
 	}else{
-		//‹t‡
+		//é€†é †
 		if(#g_path_mode == #g_PATH_MODE_NONE){
 			#g_path_mode=#g_PATH_MODE_PROJECT;
 		}else if(#g_path_mode == #g_PATH_MODE_CURRENT){
@@ -476,8 +476,8 @@ NewfileIfExist:
 	if(filetype=="new"){
 		return true;
 	}
-	//•ÒW’†‚ÌƒeƒLƒXƒg‚ğã‘‚«‚µ‚È‚¢‚½‚ß‚Ì‘Î‰B
-	//V‹Kƒtƒ@ƒCƒ‹‚ğì¬‚µ‚»‚±‚ÖEverything‚ÌŒ‹‰Ê‚ğo—Í‚·‚éB
+	//ç·¨é›†ä¸­ã®ãƒ†ã‚­ã‚¹ãƒˆã‚’ä¸Šæ›¸ãã—ãªã„ãŸã‚ã®å¯¾å¿œã€‚
+	//æ–°è¦ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆã—ãã“ã¸Everythingã®çµæœã‚’å‡ºåŠ›ã™ã‚‹ã€‚
 	newfile;
 	if(result==0){
 		return false;
@@ -500,27 +500,27 @@ CloseFileIfOpen:
 
 UpdateDialogStatus:
 	if(#g_search_mode==#g_SEARCH_DEFAULT){
-		$$regex="ŒŸõ(R)        [’Êí]| ³‹K•\Œ» ";
+		$$regex="æ¤œç´¢(R)        [é€šå¸¸]| æ­£è¦è¡¨ç¾ ";
 	}else{
-		$$regex="ŒŸõ(R)         ’Êí |[³‹K•\Œ»]";
+		$$regex="æ¤œç´¢(R)         é€šå¸¸ |[æ­£è¦è¡¨ç¾]";
 	}
 	if(#g_match_full_path){
-		$$filter="i‚è‚İ(D)    [ƒtƒ‹ƒpƒX–¼]| ƒtƒ@ƒCƒ‹–¼ ";
+		$$filter="çµã‚Šè¾¼ã¿(D)    [ãƒ•ãƒ«ãƒ‘ã‚¹å]| ãƒ•ã‚¡ã‚¤ãƒ«å ";
 	}else{
-		$$filter="i‚è‚İ(D)     ƒtƒ‹ƒpƒX–¼ |[ƒtƒ@ƒCƒ‹–¼]";
+		$$filter="çµã‚Šè¾¼ã¿(D)     ãƒ•ãƒ«ãƒ‘ã‚¹å |[ãƒ•ã‚¡ã‚¤ãƒ«å]";
 	}
 
 	##n=dllfunc("SETCTRLSTRING","Everything@regex", $$regex);
 	##n=dllfunc("SETCTRLSTRING","Everything@filter", $$filter);
 
 	if(#g_path_mode==#g_PATH_MODE_NONE){
-		$$folder="ƒtƒHƒ‹ƒ_(F/B)  [’Êí]| ƒJƒŒƒ“ƒg | ƒvƒƒWƒFƒNƒg  ";
+		$$folder="ãƒ•ã‚©ãƒ«ãƒ€(F/B)  [é€šå¸¸]| ã‚«ãƒ¬ãƒ³ãƒˆ | ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ  ";
 	}else if(#g_path_mode==#g_PATH_MODE_CURRENT){
-		$$folder="ƒtƒHƒ‹ƒ_(F/B)   ’Êí |[ƒJƒŒƒ“ƒg]| ƒvƒƒWƒFƒNƒg  ";
+		$$folder="ãƒ•ã‚©ãƒ«ãƒ€(F/B)   é€šå¸¸ |[ã‚«ãƒ¬ãƒ³ãƒˆ]| ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ  ";
 	}else if(#g_path_mode==#g_PATH_MODE_PROJECT){
-		$$folder="ƒtƒHƒ‹ƒ_(F/B)   ’Êí | ƒJƒŒƒ“ƒg |[ƒvƒƒWƒFƒNƒg] ";
+		$$folder="ãƒ•ã‚©ãƒ«ãƒ€(F/B)   é€šå¸¸ | ã‚«ãƒ¬ãƒ³ãƒˆ |[ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ] ";
 	}else{
-		$$folder="ƒtƒHƒ‹ƒ_(F/B)  [’Êí]| ƒJƒŒƒ“ƒg | ƒvƒƒWƒFƒNƒg  ";
+		$$folder="ãƒ•ã‚©ãƒ«ãƒ€(F/B)  [é€šå¸¸]| ã‚«ãƒ¬ãƒ³ãƒˆ | ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ  ";
 	}
 
 	call GetSearchPath;
@@ -552,14 +552,14 @@ UpdateHistoryGui:
 	return ;
 
 CreateDialog:
-	if (dllfunc("NEWDIALOG", "Everything‚Åƒtƒ@ƒCƒ‹‚ğŒŸõ‚·‚éƒ}ƒNƒ " + $g_version, 30, "0 0 center '‚l‚r ƒSƒVƒbƒN'") == 0){
-		message "ƒ_ƒCƒAƒƒO‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½\n";
+	if (dllfunc("NEWDIALOG", "Everythingã§ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ¤œç´¢ã™ã‚‹ãƒã‚¯ãƒ­ " + $g_version, 30, "0 0 center 'ï¼­ï¼³ ã‚´ã‚·ãƒƒã‚¯'") == 0){
+		message "ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸ\n";
 		return false;
 	}
 	
 	call CreateDialogHistrory;
 	if(! ##return){
-		message "ƒ_ƒCƒAƒƒO‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½\n";
+		message "ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸ\n";
 		return false;
 	}
 	
@@ -570,39 +570,39 @@ CreateDialog:
 		dllfunc("NEWCONTROL", "text", "Everything@filter",	"") == 0		||
 		//dllfunc("NEWCONTROL", "text", "Everything@history", "") == 0		||
 
-		//‹ós
+		//ç©ºè¡Œ
 		dllfunc("NEWCONTROL", "text", "", "") == 0							||
 		//dllfunc("NEWCONTROL", "text", "", "") == 0							||
 
-		dllfunc("NEWCONTROL", "text", "", "(&S)\tŒŸõ") == 0				||
+		dllfunc("NEWCONTROL", "text", "", "(&S)\tæ¤œç´¢") == 0				||
 		dllfunc("SETCTRLWIDTH", "", 8) == 0 								||
 		dllfunc("NEWCONTROL", "edit", "Everything@Param", "") == 0			||
 
-		//‹ós
+		//ç©ºè¡Œ
 		dllfunc("NEWCONTROL", "text", "", "") == 0							||
 		dllfunc("NEWCONTROL", "text", "", "") == 0							||
 
 		dllfunc("NEWCONTROL", "okcancel", "Everything@OkCancel", "") == 0	||
 		
-		//‹ós
+		//ç©ºè¡Œ
 		dllfunc("NEWCONTROL", "text", "", "") == 0							||
 		
 		dllfunc("NEWCONTROL", "button", "Everything@Help", "?") == 0		||
 		dllfunc("SETCTRLWIDTH", "", 8) == 0 								||
 		dllfunc("SETCTRLNOTIFY","",$g_NOTIFY_HELP) == 0
 	){
-		message "ƒ_ƒCƒAƒƒO‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½\n";
+		message "ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸ\n";
 		return false;
 	}
 	call UpdateDialogStatus;
-	// ƒ_ƒCƒAƒƒO‚Ì•\¦
+	// ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®è¡¨ç¤º
 	##n = dllfunc("SHOWDIALOG", hidemaruhandle(0), 0);
 	return true;
 
 CreateDialogHistrory:
-	/*ŒŸõ—š—ğ‚ÌƒRƒ“ƒgƒ[ƒ‹‚ğì¬‚·‚é
+	/*æ¤œç´¢å±¥æ­´ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’ä½œæˆã™ã‚‹
 	*/
-	if(	dllfunc("NEWCONTROL", "text", "","—š—ğ(N/P)") == 0					||
+	if(	dllfunc("NEWCONTROL", "text", "","å±¥æ­´(N/P)") == 0					||
 		dllfunc("NEWCONTROL", "text", "","==============================")==0
 	){
 		return false;
@@ -633,13 +633,13 @@ InputFromText:
 
 CheckEnvironment:
 	if(! existfile($g_exe)){
-		message "iniƒtƒ@ƒCƒ‹‚Åw’è‚³‚ê‚½Àsƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB\n\n" +
-				"yŒ©‚Â‚©‚ç‚È‚¢Àsƒtƒ@ƒCƒ‹–¼z\n"	+
+		message "iniãƒ•ã‚¡ã‚¤ãƒ«ã§æŒ‡å®šã•ã‚ŒãŸå®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚\n\n" +
+				"ã€è¦‹ã¤ã‹ã‚‰ãªã„å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«åã€‘\n"	+
 				$g_exe + "\n\n" 					+
-				"yiniƒtƒ@ƒCƒ‹–¼z\n"				+
+				"ã€iniãƒ•ã‚¡ã‚¤ãƒ«åã€‘\n"				+
 				$g_ini_config_filename	+ "\n\n"	+
-				"y‘Î‰•û–@z\n"					+
-				"iniƒtƒ@ƒCƒ‹‚É³‚µ‚¢Àsƒtƒ@ƒCƒ‹–¼‚ğİ’è‚µ‚Ä‰º‚³‚¢B\n"
+				"ã€å¯¾å¿œæ–¹æ³•ã€‘\n"					+
+				"iniãƒ•ã‚¡ã‚¤ãƒ«ã«æ­£ã—ã„å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¨­å®šã—ã¦ä¸‹ã•ã„ã€‚\n"
 				;
 
 		return false;
@@ -712,8 +712,8 @@ MakeEverythingArgument:
 		if(#g_search_mode==#g_SEARCH_REGEX){
 			$$path_mode = quote($$path_mode);
 		}else{
-			//(memo)’ÊíŒŸõ‚Ìê‡B
-			//ƒpƒX–¼‚ğŒŸõŒê‹å‚Æ‚·‚é‚½‚ß‚É‹ó”’•¶š‚ğ’Ç‰Á‚·‚éB
+			//(memo)é€šå¸¸æ¤œç´¢ã®å ´åˆã€‚
+			//ãƒ‘ã‚¹åã‚’æ¤œç´¢èªå¥ã¨ã™ã‚‹ãŸã‚ã«ç©ºç™½æ–‡å­—ã‚’è¿½åŠ ã™ã‚‹ã€‚
 			$$path_mode = $$path_mode+" ";
 		}
 	}
@@ -773,7 +773,7 @@ HilightWorld:
 
 
 SearchWordsToRegex:
-	/*‹ó”’‹æØ‚è‚Ì•¶š—ñ‚ğ³‹K•\Œ»‚É•ÏŠ·‚·‚éB
+	/*ç©ºç™½åŒºåˆ‡ã‚Šã®æ–‡å­—åˆ—ã‚’æ­£è¦è¡¨ç¾ã«å¤‰æ›ã™ã‚‹ã€‚
 	[in]	"hoge 123 .txt"
 	[out]	"hoge|123|\.txt"
 	*/
@@ -785,10 +785,10 @@ SearchWordsToRegex:
 TrimString:
 	while(1){
 	  ##word=strlen($$1);
-	  //•¶š—ñ‚Ìæ“ª‚É‹ó”’•¶š‚ª‚ ‚éê‡A‹ó”’•¶š‚ğíœ
+	  //æ–‡å­—åˆ—ã®å…ˆé ­ã«ç©ºç™½æ–‡å­—ãŒã‚ã‚‹å ´åˆã€ç©ºç™½æ–‡å­—ã‚’å‰Šé™¤
 	  if(strstr($g_space,leftstr($$1,2))!=-1)$$1=rightstr($$1,##word-2);
 	  else if(strstr($g_space,rightstr($$1,2))!=-1)$$1=leftstr($$1,##word-2);
-	  //‚±‚±‚Ü‚Å‘SŠp•¶š‚Ì‘Îˆ
+	  //ã“ã“ã¾ã§å…¨è§’æ–‡å­—ã®å¯¾å‡¦
 	  else if(strstr($g_space,leftstr($$1,1))!=-1)$$1=rightstr($$1,##word-1);
 	  else if(strstr($g_space,rightstr($$1,1))!=-1)$$1=leftstr($$1,##word-1);
 	  else break;
@@ -797,32 +797,32 @@ TrimString:
 
 ShowHelp:
 	message
-	"<F1>                 ƒwƒ‹ƒv•\¦\n"+
-	"<Ctrl-r>             ³‹K•\Œ»‚ÌØ‚è‘Ö‚¦iƒgƒOƒ‹j\n"+
-	"<Ctrl-f>,<Ctrl-b>    ŒŸõƒpƒXØ‚è‘Ö‚¦\n"+
-	"<Ctrl-d>             ƒtƒ‹ƒpƒXEƒtƒ@ƒCƒ‹–¼ŒŸõ‚ÌØ‚è‘Ö‚¦iƒgƒOƒ‹j\n"+
-	"<Ctrl-n>,<Ctrl-p>    ŒŸõ—š—ğ‚ği‚ß‚é/–ß‚·\n"+
-	"<Enter>              Šm’è\n"+
-	"<ESC>,<Ctrl-c>       I—¹\n"
-	, "ƒwƒ‹ƒv"
+	"<F1>                 ãƒ˜ãƒ«ãƒ—è¡¨ç¤º\n"+
+	"<Ctrl-r>             æ­£è¦è¡¨ç¾ã®åˆ‡ã‚Šæ›¿ãˆï¼ˆãƒˆã‚°ãƒ«ï¼‰\n"+
+	"<Ctrl-f>,<Ctrl-b>    æ¤œç´¢ãƒ‘ã‚¹åˆ‡ã‚Šæ›¿ãˆ\n"+
+	"<Ctrl-d>             ãƒ•ãƒ«ãƒ‘ã‚¹ãƒ»ãƒ•ã‚¡ã‚¤ãƒ«åæ¤œç´¢ã®åˆ‡ã‚Šæ›¿ãˆï¼ˆãƒˆã‚°ãƒ«ï¼‰\n"+
+	"<Ctrl-n>,<Ctrl-p>    æ¤œç´¢å±¥æ­´ã‚’é€²ã‚ã‚‹/æˆ»ã™\n"+
+	"<Enter>              ç¢ºå®š\n"+
+	"<ESC>,<Ctrl-c>       çµ‚äº†\n"
+	, "ãƒ˜ãƒ«ãƒ—"
 	, 0x20;
 
 	return;
 
 
 /*****************************************************************************
-	ƒL[‚Ì‰Ÿ‰º”»’è
+	ã‚­ãƒ¼ã®æŠ¼ä¸‹åˆ¤å®š
 *****************************************************************************/
 IskeyDown:
 	if(iskeydown(##1)){
 		if(!#g_IsKeyDown[##1]){
-			//ƒL[‚ª‰Ÿ‚³‚ê‚½uŠÔ
+			//ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸç¬é–“
 			#g_IsKeyDown[##1]=true;
 			return true;
 		}
-		//ƒL[‚ğ‰Ÿ‚µ‚Ä‚¢‚é
+		//ã‚­ãƒ¼ã‚’æŠ¼ã—ã¦ã„ã‚‹
 	}else{
-		//ƒL[‚ğ—£‚µ‚Ä‚¢‚é
+		//ã‚­ãƒ¼ã‚’é›¢ã—ã¦ã„ã‚‹
 		#g_IsKeyDown[##1]=false;
 	}
 	return false;
@@ -830,15 +830,15 @@ IskeyDown:
 
 
 /*****************************************************************************
-	ŒŸõƒqƒXƒgƒŠ
+	æ¤œç´¢ãƒ’ã‚¹ãƒˆãƒª
 *****************************************************************************/
-/*ƒƒ‚
-è”²‚«À‘•‚È‚Ì‚ÅŒvZ—Ê‚ÍO(N^2)‚Å‚·B
-‚È‚Ì‚ÅAƒqƒXƒgƒŠ‚ÌÅ‘å”(#g_MAX_HISTORY_NUM)‚ğ‘å‚«‚­‚·‚é‚Æˆ—•‰‰×‚ª‚‚­‚È‚è‚Ü‚·B
+/*ãƒ¡ãƒ¢
+æ‰‹æŠœãå®Ÿè£…ãªã®ã§è¨ˆç®—é‡ã¯O(N^2)ã§ã™ã€‚
+ãªã®ã§ã€ãƒ’ã‚¹ãƒˆãƒªã®æœ€å¤§æ•°(#g_MAX_HISTORY_NUM)ã‚’å¤§ããã™ã‚‹ã¨å‡¦ç†è² è·ãŒé«˜ããªã‚Šã¾ã™ã€‚
 */
 
 /****************************
-	ƒfƒoƒbƒO—p‚Ìƒ‹[ƒ`ƒ“
+	ãƒ‡ãƒãƒƒã‚°ç”¨ã®ãƒ«ãƒ¼ãƒãƒ³
 *****************************/
 Debug:
 	//call HistroyInsertTestData;
@@ -864,7 +864,7 @@ Debug:
 
 
 /*
-   ƒqƒXƒgƒŠ‚ÌƒeƒXƒgƒf[ƒ^‚ğì¬‚·‚é
+   ãƒ’ã‚¹ãƒˆãƒªã®ãƒ†ã‚¹ãƒˆãƒ‡ãƒ¼ã‚¿ã‚’ä½œæˆã™ã‚‹
  */
 HistroyInsertTestData:
 	$g_histroy[0]=".py";
@@ -906,7 +906,7 @@ HistoryLoad:
 		$$key="_"+str(##i);
 		$$item=getinistr($g_ini_histry_filename,"history",$$key);
 		if($$item==""){
-			//iniƒtƒ@ƒCƒ‹‚É‚±‚êˆÈãƒAƒCƒeƒ€‚ª–³‚¢
+			//iniãƒ•ã‚¡ã‚¤ãƒ«ã«ã“ã‚Œä»¥ä¸Šã‚¢ã‚¤ãƒ†ãƒ ãŒç„¡ã„
 			#g_history_num=##i;
 			return;
 		}
@@ -919,32 +919,32 @@ HistoryLoad:
 	}
 	return;
 
-/*ƒqƒXƒgƒŠ‚É•¶š—ñ‚ğƒZƒbƒg‚·‚éB
-ƒqƒXƒgƒŠ‚ğ‰Šú‰»‚·‚é–Ú“I‚Å—˜—p‚·‚éB
+/*ãƒ’ã‚¹ãƒˆãƒªã«æ–‡å­—åˆ—ã‚’ã‚»ãƒƒãƒˆã™ã‚‹ã€‚
+ãƒ’ã‚¹ãƒˆãƒªã‚’åˆæœŸåŒ–ã™ã‚‹ç›®çš„ã§åˆ©ç”¨ã™ã‚‹ã€‚
 ##1	index
-$$2	İ’è‚·‚é•¶š—ñ
+$$2	è¨­å®šã™ã‚‹æ–‡å­—åˆ—
 */
 HistorySet:
 	$g_histroy[##1]=$$2;
 	return;
 
-/*Œ»İ‚ÌƒqƒXƒgƒŠ‚ğæ“¾‚·‚é
+/*ç¾åœ¨ã®ãƒ’ã‚¹ãƒˆãƒªã‚’å–å¾—ã™ã‚‹
 */
 HistoryGetCurrent:
 	return $g_histroy[#g_history_current_index];
 
-/*ƒqƒXƒgƒŠ‚ğæ“¾‚·‚é
+/*ãƒ’ã‚¹ãƒˆãƒªã‚’å–å¾—ã™ã‚‹
 ##1 index
 */
 HistoryGet:
 	return $g_histroy[##1];
 
-/*Œ»İ‚ÌƒqƒXƒgƒŠƒCƒ“ƒfƒbƒNƒX‚ğæ“¾‚·‚é
+/*ç¾åœ¨ã®ãƒ’ã‚¹ãƒˆãƒªã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’å–å¾—ã™ã‚‹
 */
 HistoryGetCurrentIndex:
 	return #g_history_current_index;
 	
-/*Œ»İ‚ÌƒqƒXƒgƒŠƒCƒ“ƒfƒbƒNƒX‚ğİ’è‚·‚é
+/*ç¾åœ¨ã®ãƒ’ã‚¹ãƒˆãƒªã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’è¨­å®šã™ã‚‹
 */
 HistorySetCurrentIndex:
 	call _HistoryClipIndex ##1;
@@ -952,24 +952,24 @@ HistorySetCurrentIndex:
 	return ;
 
 
-/*ƒqƒXƒgƒŠ‚ğˆê‚Âi‚ß‚é
-•Ô’l ˆê‚Âi‚ß‚½æ‚ÌƒqƒXƒgƒŠ•¶š—ñ*/
+/*ãƒ’ã‚¹ãƒˆãƒªã‚’ä¸€ã¤é€²ã‚ã‚‹
+è¿”å€¤ ä¸€ã¤é€²ã‚ãŸå…ˆã®ãƒ’ã‚¹ãƒˆãƒªæ–‡å­—åˆ—*/
 HistoryForward:
 	call _HistoryClipIndex #g_history_current_index + 1;
 	#g_history_current_index=##return;
 	call HistoryGetCurrent;
 	return $$return;
 
-/*ƒqƒXƒgƒŠ‚ğˆê‚Â–ß‚·
-•Ô’l  ˆê‚Â–ß‚µ‚½æ‚ÌƒqƒXƒgƒŠ•¶š—ñ*/
+/*ãƒ’ã‚¹ãƒˆãƒªã‚’ä¸€ã¤æˆ»ã™
+è¿”å€¤  ä¸€ã¤æˆ»ã—ãŸå…ˆã®ãƒ’ã‚¹ãƒˆãƒªæ–‡å­—åˆ—*/
 HistoryBack:
 	call _HistoryClipIndex #g_history_current_index - 1;
 	#g_history_current_index=##return;
 	call HistoryGetCurrent;
 	return $$return;
 
-/*V‹KƒqƒXƒgƒŠ‚ğæ“ª‚É’Ç‰Á‚·‚é
-$$1 V‹KƒqƒXƒgƒŠ‚Ì•¶š—ñ
+/*æ–°è¦ãƒ’ã‚¹ãƒˆãƒªã‚’å…ˆé ­ã«è¿½åŠ ã™ã‚‹
+$$1 æ–°è¦ãƒ’ã‚¹ãƒˆãƒªã®æ–‡å­—åˆ—
 */
 HistoryInsertTop:
 	##have_equal_item=true;
@@ -977,7 +977,7 @@ HistoryInsertTop:
 		call _HistoryRemoveEqual $$1;
 		##have_equal_item=##return;
 	}
-	//”z—ñæ“ª‚ğ‹ó‚¯‚é‚½‚ß‚ÉŒã‚ë‚É‚P‚Â‚¸‚ç‚·B
+	//é…åˆ—å…ˆé ­ã‚’ç©ºã‘ã‚‹ãŸã‚ã«å¾Œã‚ã«ï¼‘ã¤ãšã‚‰ã™ã€‚
 	##i=#g_history_num;
 	while(0 < ##i){
 		$g_histroy[##i]=$g_histroy[##i-1];
@@ -991,10 +991,10 @@ HistoryInsertTop:
 	return;
 
 
-/*“¯‚¶ƒqƒXƒgƒŠ‚ğíœ‚·‚é
-$$1 ƒqƒXƒgƒŠ‚Ì•¶š—ñ
-return 	false	d•¡–³‚µ
-		true	d•¡‚ ‚è
+/*åŒã˜ãƒ’ã‚¹ãƒˆãƒªã‚’å‰Šé™¤ã™ã‚‹
+$$1 ãƒ’ã‚¹ãƒˆãƒªã®æ–‡å­—åˆ—
+return 	false	é‡è¤‡ç„¡ã—
+		true	é‡è¤‡ã‚ã‚Š
 */
 _HistoryRemoveEqual:
 	##equal_item_index=-1;
@@ -1010,29 +1010,29 @@ _HistoryRemoveEqual:
 		return false;
 	}
 
-	//d•¡ƒqƒXƒgƒŠ‚ÌŒã‚ë‚©‚çˆê‚Â‘O‚É‹l‚ß‚é
+	//é‡è¤‡ãƒ’ã‚¹ãƒˆãƒªã®å¾Œã‚ã‹ã‚‰ä¸€ã¤å‰ã«è©°ã‚ã‚‹
 	while(##i < #g_history_num){
 		$g_histroy[##i]=$g_histroy[##i+1];
 		##i = ##i + 1;
 	}
 
-	//ƒqƒXƒgƒŠ”‚Ì’²®
+	//ãƒ’ã‚¹ãƒˆãƒªæ•°ã®èª¿æ•´
 	#g_history_num = #g_history_num - 1;
 
 	//
-	//#g_history_current_index ‚Ì’²®
+	//#g_history_current_index ã®èª¿æ•´
 	//
 	if(##equal_item_index < #g_history_current_index){
-		//d•¡ƒqƒXƒgƒŠˆÈ~‚È‚Ì‚Å’²®
+		//é‡è¤‡ãƒ’ã‚¹ãƒˆãƒªä»¥é™ãªã®ã§èª¿æ•´
 		#g_history_current_index = #g_history_current_index - 1;
 	}
 	if(#g_history_num <= #g_history_current_index){
-		//#g_history_current_index‚ÍƒqƒXƒgƒŠ”z—ñ‚ÌÅŒã‚ğw‚µ‚Ä‚¢‚é‚Ì‚ÅX‚É’²®B
+		//#g_history_current_indexã¯ãƒ’ã‚¹ãƒˆãƒªé…åˆ—ã®æœ€å¾Œã‚’æŒ‡ã—ã¦ã„ã‚‹ã®ã§æ›´ã«èª¿æ•´ã€‚
 		#g_history_current_index = #g_history_num-1;
 	}
 	return true;
 
-/*ƒqƒXƒgƒŠ‚ÌƒCƒ“ƒfƒbƒNƒX‚ğ”z—ñ‚Ì”ÍˆÍ“à‚ÉƒNƒŠƒbƒv‚·‚é
+/*ãƒ’ã‚¹ãƒˆãƒªã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’é…åˆ—ã®ç¯„å›²å†…ã«ã‚¯ãƒªãƒƒãƒ—ã™ã‚‹
 */
 _HistoryClipIndex:
 	debuginfo "_HistoryClipIndex:"+str(##1);
