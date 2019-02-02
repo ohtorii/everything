@@ -500,27 +500,27 @@ CloseFileIfOpen:
 
 UpdateDialogStatus:
 	if(#g_search_mode==#g_SEARCH_DEFAULT){
-		$$regex="検索(R)        [通常]| 正規表現 ";
+		$$regex		="検索(R)        | [通常]/ 正規表現 ";
 	}else{
-		$$regex="検索(R)         通常 |[正規表現]";
+		$$regex		="検索(R)        |  通常 /[正規表現]";
 	}
 	if(#g_match_full_path){
-		$$filter="絞り込み(D)    [フルパス名]| ファイル名 ";
+		$$filter	="絞り込み(D)    |  [フルパス名]/ ファイル名 ";
 	}else{
-		$$filter="絞り込み(D)     フルパス名 |[ファイル名]";
+		$$filter	="絞り込み(D)    |   フルパス名 /[ファイル名]";
 	}
 
 	##n=dllfunc("SETCTRLSTRING","Everything@regex", $$regex);
 	##n=dllfunc("SETCTRLSTRING","Everything@filter", $$filter);
 
 	if(#g_path_mode==#g_PATH_MODE_NONE){
-		$$folder="フォルダ(F/B)  [通常]| カレント | プロジェクト  ";
+		$$folder	="フォルダ(B/F)  | [通常]/ カレント / プロジェクト  ";
 	}else if(#g_path_mode==#g_PATH_MODE_CURRENT){
-		$$folder="フォルダ(F/B)   通常 |[カレント]| プロジェクト  ";
+		$$folder	="フォルダ(B/F)  |  通常 /[カレント]/ プロジェクト  ";
 	}else if(#g_path_mode==#g_PATH_MODE_PROJECT){
-		$$folder="フォルダ(F/B)   通常 | カレント |[プロジェクト] ";
+		$$folder	="フォルダ(B/F)  |  通常 / カレント /[プロジェクト] ";
 	}else{
-		$$folder="フォルダ(F/B)  [通常]| カレント | プロジェクト  ";
+		$$folder	="フォルダ(B/F)  | [通常]/ カレント / プロジェクト  ";
 	}
 
 	call GetSearchPath;
@@ -552,7 +552,7 @@ UpdateHistoryGui:
 	return ;
 
 CreateDialog:
-	if (dllfunc("NEWDIALOG", "Everythingでファイルを検索するマクロ " + $g_version, 30, "0 0 center 'ＭＳ ゴシック'") == 0){
+	if (dllfunc("NEWDIALOG", "Everythingでファイルを検索するマクロ " + $g_version, 120, "0 0 center 'ＭＳ ゴシック'") == 0){
 		message "ダイアログの作成に失敗しました\n";
 		return false;
 	}
@@ -564,7 +564,11 @@ CreateDialog:
 	}
 	
 	
-	if(	dllfunc("NEWCOLUMN", 80) == 0 ||
+	if(	/*dllfunc("NEWCOLUMN", 80) == 0 ||*/
+		//空行
+		dllfunc("NEWCONTROL", "text", "", "") == 0							||
+		dllfunc("NEWCONTROL", "text", "", "") == 0							||
+		
 		dllfunc("NEWCONTROL", "text", "Everything@folder",	"") == 0		||
 		dllfunc("NEWCONTROL", "text", "Everything@regex",	"") == 0		||
 		dllfunc("NEWCONTROL", "text", "Everything@filter",	"") == 0		||
@@ -572,7 +576,7 @@ CreateDialog:
 
 		//空行
 		dllfunc("NEWCONTROL", "text", "", "") == 0							||
-		//dllfunc("NEWCONTROL", "text", "", "") == 0							||
+		dllfunc("NEWCONTROL", "text", "", "") == 0							||
 
 		dllfunc("NEWCONTROL", "text", "", "(&S)\t検索") == 0				||
 		dllfunc("SETCTRLWIDTH", "", 8) == 0 								||
@@ -602,8 +606,8 @@ CreateDialog:
 CreateDialogHistrory:
 	/*検索履歴のコントロールを作成する
 	*/
-	if(	dllfunc("NEWCONTROL", "text", "","履歴(N/P)") == 0					||
-		dllfunc("NEWCONTROL", "text", "","==============================")==0
+	if(	dllfunc("NEWCONTROL", "text", "","履歴(P/N)") == 0					
+		//dllfunc("NEWCONTROL", "text", "","--------------------------")==0
 	){
 		return false;
 	}
