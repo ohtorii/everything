@@ -108,7 +108,7 @@ $g_NOTIFY_HELP="99";
 /*************************
 	検索ヒストリ
 /*************************/
-#g_MAX_HISTORY_NUM		=8;				//ヒストリの最大数
+#g_MAX_HISTORY_NUM		=9;				//ヒストリの最大数
 #g_history_num			=0;				//最後のインデックス
 #g_history_current_index=0; 			//現在のインデックス
 $g_histroy[0]			="";			//ヒストリのリングバッファ
@@ -258,7 +258,27 @@ Start:
 	##n=dllfunc("SETCTRLSTRING", "Everything@Param", $$return);
 
 	debuginfo 0;
+	call MainLoop;
+	$$item=$$return;
+	
+	##n = dllfunc("ENDDIALOG");
 
+	if($$item=="0"){
+		//ユーザーはファイル検索をキャンセルしたので検索ウインドウを開いていれば閉じる。
+		return false;
+	}else if ($$item == "1"){
+		//ユーザーはファイル検索の結果を受け入れたので検索ウインドウをそのままにする。
+		if($g_search_pattern!=""){
+			call HistoryInsertTop $g_search_pattern;
+			call HistorySave;
+		}
+		return true;
+	}
+	//念のためウインドウを開いたままにする
+	return true;
+
+
+MainLoop:
 	//文字入力中に適度な間隔でファイル内容を更新する。
 	##interval			= 300;
 	##prev_tick 		= 0;
@@ -312,7 +332,20 @@ Start:
 				call UpdateSearchWindow;
 				continue;
 			}
-
+			
+			//<c-s>
+			call IskeyDown 0x53;
+			if(##return){
+				##n = dllfunc("SETFOCUSEDCTRL","Everything@Param");
+				continue;
+			}
+			
+			//<c-1> ~ <c-9>
+			call MainLoop_Histroy;
+			if(##return){
+				continue;
+			}
+			
 			//<c-d>
 			call IskeyDown 0x44;
 			if(##return){
@@ -366,21 +399,35 @@ Start:
 			continue;
 		}
 	}
-	##n = dllfunc("ENDDIALOG");
+	return $$item;
+	
 
-	if($$item=="0"){
-		//ユーザーはファイル検索をキャンセルしたので検索ウインドウを開いていれば閉じる。
-		return false;
-	}else if ($$item == "1"){
-		//ユーザーはファイル検索の結果を受け入れたので検索ウインドウをそのままにする。
-		if($g_search_pattern!=""){
-			call HistoryInsertTop $g_search_pattern;
-			call HistorySave;
+MainLoop_Histroy:
+	call CalcHistroyShortcutNum;
+	##n=##return;
+	
+	##key_1=0x31;
+	##histrory_index=0;
+	while(##histrory_index<##n){
+		call IskeyDown ##key_1+##histrory_index;
+		if(##return){
+			call HistorySetCurrentIndex ##histrory_index;
+			call UpdateHistoryGui;
+			call HistoryGetCurrent;
+			##n=dllfunc("SETCTRLSTRING", "Everything@Param", $$return);
+			return true;
 		}
-		return true;
+		##histrory_index = ##histrory_index + 1;
 	}
-	//念のためウインドウを開いたままにする
-	return true;
+	return false;
+
+
+CalcHistroyShortcutNum:
+	##n=9;//1-9
+	if(#g_MAX_HISTORY_NUM < ##n){
+		return #g_MAX_HISTORY_NUM;
+	}
+	return ##n;
 
 
 ToggleMatchFullPathMode:
@@ -486,20 +533,46 @@ UpdateDialogStatus:
 	return ;
 
 UpdateHistoryGui:
-	call HistoryGetCurrent;
-	##n=dllfunc("SETCTRLSTRING", "Everything@history", "履歴(N/P)      "+$$return);
+	call HistoryGetCurrentIndex;
+	##current_index = ##return;
+	
+	##i=0;
+	while(##i<#g_MAX_HISTORY_NUM){
+		call HistoryGet ##i;
+		if(##current_index==##i){
+			$$pre ="[";
+			$$post="]";
+		}else{
+			$$pre =" ";
+			$$post=" ";
+		}
+		##n=dllfunc("SETCTRLSTRING", "Everything@history"+str(1+##i),sprintf("(&%d)%s%s%s",1+##i,$$pre,$$return,$$post));
+		##i = ##i + 1;
+	}
 	return ;
 
 CreateDialog:
-	if (dllfunc("NEWDIALOG", "Everythingでファイルを検索するマクロ " + $g_version, 128, "0 0 center 'ＭＳ ゴシック'") == 0	||
-
+	if (dllfunc("NEWDIALOG", "Everythingでファイルを検索するマクロ " + $g_version, 30, "0 0 center 'ＭＳ ゴシック'") == 0){
+		message "ダイアログの作成に失敗しました\n";
+		return false;
+	}
+	
+	call CreateDialogHistrory;
+	if(! ##return){
+		message "ダイアログの作成に失敗しました\n";
+		return false;
+	}
+	
+	
+	if(	dllfunc("NEWCOLUMN", 80) == 0 ||
 		dllfunc("NEWCONTROL", "text", "Everything@folder",	"") == 0		||
 		dllfunc("NEWCONTROL", "text", "Everything@regex",	"") == 0		||
 		dllfunc("NEWCONTROL", "text", "Everything@filter",	"") == 0		||
-		dllfunc("NEWCONTROL", "text", "Everything@history", "") == 0		||
+		//dllfunc("NEWCONTROL", "text", "Everything@history", "") == 0		||
 
 		//空行
 		dllfunc("NEWCONTROL", "text", "", "") == 0							||
+		//dllfunc("NEWCONTROL", "text", "", "") == 0							||
 
 		dllfunc("NEWCONTROL", "text", "", "(&S)\t検索") == 0				||
 		dllfunc("SETCTRLWIDTH", "", 8) == 0 								||
@@ -507,8 +580,13 @@ CreateDialog:
 
 		//空行
 		dllfunc("NEWCONTROL", "text", "", "") == 0							||
+		dllfunc("NEWCONTROL", "text", "", "") == 0							||
 
 		dllfunc("NEWCONTROL", "okcancel", "Everything@OkCancel", "") == 0	||
+		
+		//空行
+		dllfunc("NEWCONTROL", "text", "", "") == 0							||
+		
 		dllfunc("NEWCONTROL", "button", "Everything@Help", "?") == 0		||
 		dllfunc("SETCTRLWIDTH", "", 8) == 0 								||
 		dllfunc("SETCTRLNOTIFY","",$g_NOTIFY_HELP) == 0
@@ -521,7 +599,25 @@ CreateDialog:
 	##n = dllfunc("SHOWDIALOG", hidemaruhandle(0), 0);
 	return true;
 
-
+CreateDialogHistrory:
+	/*検索履歴のコントロールを作成する
+	*/
+	if(	dllfunc("NEWCONTROL", "text", "","履歴(N/P)") == 0					||
+		dllfunc("NEWCONTROL", "text", "","==============================")==0
+	){
+		return false;
+	}
+	call CalcHistroyShortcutNum;
+	##n=##return;
+	##i=0;
+	while(##i<##n){
+		if(dllfunc("NEWCONTROL", "text", "Everything@history"+str(1+##i),"") == 0){
+			return false;
+		}
+		##i = ##i + 1;
+	}
+	return true;
+	
 InputFromText:
 	if(selecting){
 		$$search_words = gettext2(seltopcolumn,seltoplineno,selendcolumn,selendlineno,1);
@@ -836,6 +932,25 @@ HistorySet:
 */
 HistoryGetCurrent:
 	return $g_histroy[#g_history_current_index];
+
+/*ヒストリを取得する
+##1 index
+*/
+HistoryGet:
+	return $g_histroy[##1];
+
+/*現在のヒストリインデックスを取得する
+*/
+HistoryGetCurrentIndex:
+	return #g_history_current_index;
+	
+/*現在のヒストリインデックスを設定する
+*/
+HistorySetCurrentIndex:
+	call _HistoryClipIndex ##1;
+	#g_history_current_index=##return;
+	return ;
+
 
 /*ヒストリを一つ進める
 返値 一つ進めた先のヒストリ文字列*/
