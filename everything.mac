@@ -49,7 +49,7 @@ SOFTWARE.
 	定義
 *****************************************************************************/
 //バージョン番号
-$g_version 		= "version 2.0.4";
+$g_version 		= "version 2.1.0";
 
 
 #g_hmjre_dll 	= 0;
@@ -196,7 +196,7 @@ LoadHmJReDll:
 	if(#g_hmjre_dll){
 		return true;
 	}
-	
+
 	#g_hmjre_dll=loaddll(hidemarudir + "\\HmJre.dll");
 	if(#g_hmjre_dll){
 		return true;
@@ -346,6 +346,7 @@ Start:
 				call HistoryBack;
 				debuginfo "next: "+str(#g_history_current_index);
 				##n=dllfunc("SETCTRLSTRING", "Everything@Param", $$return);
+				call UpdateHistoryGui;
 				continue;
 			}
 
@@ -354,6 +355,7 @@ Start:
 			if(##return){
 				call HistoryForward;
 				##n=dllfunc("SETCTRLSTRING", "Everything@Param", $$return);
+				call UpdateHistoryGui;
 				continue;
 			}
 		}
@@ -451,39 +453,64 @@ CloseFileIfOpen:
 
 UpdateDialogStatus:
 	if(#g_search_mode==#g_SEARCH_DEFAULT){
-		$$mode="";
+		$$regex="検索(R)        [通常]| 正規表現 ";
 	}else{
-		$$mode=" regex";
+		$$regex="検索(R)         通常 |[正規表現]";
 	}
 	if(#g_match_full_path){
-		$$path="path";
+		$$filter="絞り込み(D)    [フルパス名]| ファイル名 ";
 	}else{
-		$$path="file";
+		$$filter="絞り込み(D)     フルパス名 |[ファイル名]";
 	}
-	##n=dllfunc("SETCTRLSTRING","Everything@Status", $$path + $$mode);
 
-	call GetSearchPathModeString;
-	$$search_path_mode=$$return;
+	##n=dllfunc("SETCTRLSTRING","Everything@regex", $$regex);
+	##n=dllfunc("SETCTRLSTRING","Everything@filter", $$filter);
+
+	if(#g_path_mode==#g_PATH_MODE_NONE){
+		$$folder="フォルダ(F/B)  [通常]| カレント | プロジェクト  ";
+	}else if(#g_path_mode==#g_PATH_MODE_CURRENT){
+		$$folder="フォルダ(F/B)   通常 |[カレント]| プロジェクト  ";
+	}else if(#g_path_mode==#g_PATH_MODE_PROJECT){
+		$$folder="フォルダ(F/B)   通常 | カレント |[プロジェクト] ";
+	}else{
+		$$folder="フォルダ(F/B)  [通常]| カレント | プロジェクト  ";
+	}
+
 	call GetSearchPath;
 	$$search_path = $$return;
 	if($$search_path==""){
 		$$search_path="*";
 	}
-	##n=dllfunc("SETCTRLSTRING","Everything@SearchPath", "["+$$search_path_mode+"]" + $$search_path);
+	##n=dllfunc("SETCTRLSTRING","Everything@folder", $$folder + $$search_path);
+	call UpdateHistoryGui;
 	return ;
 
+UpdateHistoryGui:
+	call HistoryGetCurrent;
+	##n=dllfunc("SETCTRLSTRING", "Everything@history", "履歴(N/P)      "+$$return);
+	return ;
 
 CreateDialog:
-	if (dllfunc("NEWDIALOG", "Everythingでファイルを検索するマクロ " + $g_version, 128) == 0	||
-		dllfunc("NEWCONTROL", "text", "Everything@Status", "") == 0 							||
-		dllfunc("SETCTRLWIDTH", "", 10) == 0													||
-		dllfunc("NEWCONTROL", "text", "Everything@SearchPath", "") == 0 						||
-		dllfunc("NEWCONTROL", "text", "", "検索(S)") == 0										||
-		dllfunc("SETCTRLWIDTH", "", 8) == 0 													||
-		dllfunc("NEWCONTROL", "edit", "Everything@Param", "") == 0								||
-		dllfunc("NEWCONTROL", "okcancel", "Everything@OkCancel", "") == 0						||
-		dllfunc("NEWCONTROL", "button", "Everything@Help", "?") == 0							||
-		dllfunc("SETCTRLWIDTH", "", 8) == 0														||
+	if (dllfunc("NEWDIALOG", "Everythingでファイルを検索するマクロ " + $g_version, 128, "0 0 center 'ＭＳ ゴシック'") == 0	||
+
+		dllfunc("NEWCONTROL", "text", "Everything@folder",	"") == 0		||
+		dllfunc("NEWCONTROL", "text", "Everything@regex",	"") == 0		||
+		dllfunc("NEWCONTROL", "text", "Everything@filter",	"") == 0		||
+		dllfunc("NEWCONTROL", "text", "Everything@history", "") == 0		||
+
+		//空行
+		dllfunc("NEWCONTROL", "text", "", "") == 0							||
+
+		dllfunc("NEWCONTROL", "text", "", "(&S)\t検索") == 0				||
+		dllfunc("SETCTRLWIDTH", "", 8) == 0 								||
+		dllfunc("NEWCONTROL", "edit", "Everything@Param", "") == 0			||
+
+		//空行
+		dllfunc("NEWCONTROL", "text", "", "") == 0							||
+
+		dllfunc("NEWCONTROL", "okcancel", "Everything@OkCancel", "") == 0	||
+		dllfunc("NEWCONTROL", "button", "Everything@Help", "?") == 0		||
+		dllfunc("SETCTRLWIDTH", "", 8) == 0 								||
 		dllfunc("SETCTRLNOTIFY","",$g_NOTIFY_HELP) == 0
 	){
 		message "ダイアログの作成に失敗しました\n";
