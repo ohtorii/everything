@@ -179,66 +179,6 @@ Main:
 	call WriteIni;
 	return ##result;
 
-LoadDengakuDll:
-	loaddll macrodir + "\\DengakuDLL.dll";
-	if (result) {
-		return true;
-	}
-	loaddll hidemarudir + "\\DengakuDLL.dll";
-	if (result) {
-		return true;
-	}
-	message "田楽DLLのロードに失敗しました\n" + "DengakuDLL.dllが秀丸マクロディレクトリに存在するか確認してください";
-	return false;
-
-LoadHmJReDll:
-	#g_hmjre_dll=loaddll(macrodir + "\\HmJre.dll");
-	if(#g_hmjre_dll){
-		return true;
-	}
-
-	#g_hmjre_dll=loaddll(hidemarudir + "\\HmJre.dll");
-	if(#g_hmjre_dll){
-		return true;
-	}
-	message "HmJre.dll のロードに失敗しました\n" +
-				+ "HmJre.dllが秀丸エディタのディレクトリに存在するか確認してください";
-		return false;
-	return false;
-
-LoadIni:
-	$g_exe						= getinistr($g_ini_config_filename,"program","command"					);
-	$g_argument_default 		= getinistr($g_ini_config_filename,"program","argument_default" 		);
-	$g_argument_regex			= getinistr($g_ini_config_filename,"program","argument_regex"			);
-	$g_option_match_full_path	= getinistr($g_ini_config_filename,"program","option_match_full_path"	);
-	#g_match_full_path	=getininum( $g_ini_histry_filename, "setting", "match_full_path");
-	#g_search_mode		=getininum( $g_ini_histry_filename, "setting", "regex");
-	#g_path_mode		=getininum( $g_ini_histry_filename, "setting", "search_path");
-	return true;
-
-
-SanitizeIni:
-	//bool
-	if(#g_match_full_path!=0){
-		#g_match_full_path=1;
-	}
-	//bool
-	if(#g_search_mode!=0){
-		#g_search_mode=1;
-	}
-	if(#g_path_mode<0){
-		#g_path_mode=0;
-	}else if(#g_PATH_MODE_NUM <= #g_path_mode){
-		#g_path_mode=0;
-	}
-	return;
-
-
-WriteIni:
-	writeininum $g_ini_histry_filename, "setting", "match_full_path", #g_match_full_path;
-	writeininum $g_ini_histry_filename, "setting", "regex", #g_search_mode;
-	writeininum $g_ini_histry_filename, "setting", "search_path", #g_path_mode;
-	return ;
 
 Start:
 	/*
@@ -277,7 +217,7 @@ Start:
 	//念のためウインドウを開いたままにする
 	return true;
 
-
+//#region メインループ
 MainLoop:
 	//文字入力中に適度な間隔でファイル内容を更新する。
 	##interval			= 300;
@@ -470,33 +410,92 @@ SwitchPathMode:
 	}
 	return;
 
+GetSearchPath:
+	if(#g_path_mode==#g_PATH_MODE_NONE){
+		$$path_mode = "";
+	}else if(#g_path_mode==#g_PATH_MODE_CURRENT){
+		$$path_mode = $g_path_current;
+	}else if(#g_path_mode==#g_PATH_MODE_PROJECT){
+		$$path_mode = $g_path_project;
+	}else{
+		$$path_mode = "";
+	}
+	return $$path_mode;
 
-NewfileIfExist:
-	#g_open_newfile = false;
-	if(filetype=="new"){
+
+GetSearchPathModeString:
+	if(#g_path_mode==#g_PATH_MODE_NONE){
+		return "default";
+	}else if(#g_path_mode==#g_PATH_MODE_CURRENT){
+		return "current";
+	}else if(#g_path_mode==#g_PATH_MODE_PROJECT){
+		return "project";
+	}else{
+		return "";
+	}
+	return "";
+
+//#region ダイアログ操作
+CreateDialog:
+	call CreateDialogMain;
+	if(##return){
 		return true;
 	}
-	//編集中のテキストを上書きしないための対応。
-	//新規ファイルを作成しそこへEverythingの結果を出力する。
-	newfile;
-	if(result==0){
+	message "ダイアログの作成に失敗しました\n";
+	return false;
+
+
+CreateDialogMain:
+	//memo: 固定幅のフォント('ＭＳ ゴシック')に変更しています。
+	if (dllfunc("NEWDIALOG", "Everythingでファイルを検索するマクロ " + $g_version, 120, "0 0 center 'ＭＳ ゴシック'") == 0){
 		return false;
 	}
-	#g_open_newfile=true;
-	#g_new_hidemaru=hidemaruhandle(0);
+	if(	dllfunc("NEWCONTROL", "text", "", "(&S)\t検索") == 0				||
+		dllfunc("SETCTRLWIDTH", "", 8) == 0 								||
+		dllfunc("NEWCONTROL", "edit", "Everything@Param", "") == 0			||
+		/*空行*/
+		dllfunc("NEWCONTROL", "text", "", "") == 0							||
+		
+		dllfunc("NEWCONTROL", "text", "Everything@folder",	"") == 0		||
+		dllfunc("NEWCONTROL", "text", "Everything@regex",	"") == 0		||
+		dllfunc("NEWCONTROL", "text", "Everything@filter",	"") == 0		||
+		/*空行*/
+		dllfunc("NEWCONTROL", "text", "", "") == 0							
+	){
+		return false;
+	}
+	call CreateDialogHistrory;
+	if(! ##return){
+		return false;
+	}
+	if(	/*空行*/
+		dllfunc("NEWCONTROL", "text", "", "") == 0							||
+		
+		dllfunc("NEWCONTROL", "button", "Everything@Help", "?") == 0		||
+		dllfunc("SETCTRLWIDTH", "", 8) == 0 								||
+		dllfunc("SETCTRLNOTIFY","",$g_NOTIFY_HELP) == 0
+	){
+		return false;
+	}
+	
+	call UpdateDialogStatus;
+	// ダイアログの表示
+	##n = dllfunc("SHOWDIALOG", hidemaruhandle(0), 0);
 	return true;
 
-
-CloseFileIfOpen:
-	if(#g_open_newfile){
-		setactivehidemaru	#g_old_hidemaru;
-		closehidemaruforced #g_new_hidemaru;
-
-		#g_old_hidemaru=0;
-		#g_new_hidemaru=0;
+CreateDialogHistrory:
+	/*検索履歴のコントロールを作成する
+	*/
+	call CalcHistroyShortcutNum;
+	##n=##return;
+	##i=0;
+	while(##i<##n){
+		if(dllfunc("NEWCONTROL", "text", "Everything@history"+str(1+##i),"") == 0){
+			return false;
+		}
+		##i = ##i + 1;
 	}
 	return true;
-
 
 UpdateDialogStatus:
 	if(#g_search_mode==#g_SEARCH_DEFAULT){
@@ -533,11 +532,18 @@ UpdateDialogStatus:
 	return ;
 
 UpdateHistoryGui:
+	/*検索履歴を更新する
+	*/
 	call HistoryGetCurrentIndex;
 	##current_index = ##return;
 	
-	##i=0;
+	##i		= 0;
 	while(##i<#g_MAX_HISTORY_NUM){
+		if(##i==0){
+			$$header="履歴(P/N)      | ";
+		}else{
+			$$header="               | ";
+		}
 		call HistoryGet ##i;
 		if(##current_index==##i){
 			$$pre ="[";
@@ -546,154 +552,32 @@ UpdateHistoryGui:
 			$$pre =" ";
 			$$post=" ";
 		}
-		##n=dllfunc("SETCTRLSTRING", "Everything@history"+str(1+##i),sprintf("(&%d)%s%s%s",1+##i,$$pre,$$return,$$post));
+		##n=dllfunc("SETCTRLSTRING", "Everything@history"+str(1+##i),sprintf("%s(&%d)%s%s%s",$$header,1+##i,$$pre,$$return,$$post));
 		##i = ##i + 1;
 	}
 	return ;
-
-CreateDialog:
-	if (dllfunc("NEWDIALOG", "Everythingでファイルを検索するマクロ " + $g_version, 120, "0 0 center 'ＭＳ ゴシック'") == 0){
-		message "ダイアログの作成に失敗しました\n";
-		return false;
-	}
 	
-	call CreateDialogHistrory;
-	if(! ##return){
-		message "ダイアログの作成に失敗しました\n";
-		return false;
-	}
-	
-	
-	if(	/*dllfunc("NEWCOLUMN", 80) == 0 ||*/
-		//空行
-		dllfunc("NEWCONTROL", "text", "", "") == 0							||
-		dllfunc("NEWCONTROL", "text", "", "") == 0							||
-		
-		dllfunc("NEWCONTROL", "text", "Everything@folder",	"") == 0		||
-		dllfunc("NEWCONTROL", "text", "Everything@regex",	"") == 0		||
-		dllfunc("NEWCONTROL", "text", "Everything@filter",	"") == 0		||
-		//dllfunc("NEWCONTROL", "text", "Everything@history", "") == 0		||
 
-		//空行
-		dllfunc("NEWCONTROL", "text", "", "") == 0							||
-		dllfunc("NEWCONTROL", "text", "", "") == 0							||
+ShowHelp:
+	message
+	"<F1>                 ヘルプの表示\n"+
+	"\n"+
+	"<Ctrl-b>,<Ctrl-f>    検索フォルダの切り替え\n"+
+	"<Ctrl-r>             正規表現の切り替え（トグル）\n"+
+	"<Ctrl-d>             絞り込み検索の切り替え（トグル）\n"+
+	"<Ctrl-p>,<Ctrl-n>    検索履歴を進める/戻す\n"+
+	"<Ctrl-1>～<Ctrl-9>   検索履歴を指定する\n"+
+	"<Ctrl-s>,<Alt-s>     検索ボックスに入力フォーカスを移動する\n"+
+	"\n"+
+	"<Enter>              確定する\n"+
+	"<ESC>,<Ctrl-c>       終了する\n"
+	, "ヘルプ"
+	, 0x20;
 
-		dllfunc("NEWCONTROL", "text", "", "(&S)\t検索") == 0				||
-		dllfunc("SETCTRLWIDTH", "", 8) == 0 								||
-		dllfunc("NEWCONTROL", "edit", "Everything@Param", "") == 0			||
-
-		//空行
-		dllfunc("NEWCONTROL", "text", "", "") == 0							||
-		dllfunc("NEWCONTROL", "text", "", "") == 0							||
-
-		dllfunc("NEWCONTROL", "okcancel", "Everything@OkCancel", "") == 0	||
-		
-		//空行
-		dllfunc("NEWCONTROL", "text", "", "") == 0							||
-		
-		dllfunc("NEWCONTROL", "button", "Everything@Help", "?") == 0		||
-		dllfunc("SETCTRLWIDTH", "", 8) == 0 								||
-		dllfunc("SETCTRLNOTIFY","",$g_NOTIFY_HELP) == 0
-	){
-		message "ダイアログの作成に失敗しました\n";
-		return false;
-	}
-	call UpdateDialogStatus;
-	// ダイアログの表示
-	##n = dllfunc("SHOWDIALOG", hidemaruhandle(0), 0);
-	return true;
-
-CreateDialogHistrory:
-	/*検索履歴のコントロールを作成する
-	*/
-	if(	dllfunc("NEWCONTROL", "text", "","履歴(P/N)") == 0					
-		//dllfunc("NEWCONTROL", "text", "","--------------------------")==0
-	){
-		return false;
-	}
-	call CalcHistroyShortcutNum;
-	##n=##return;
-	##i=0;
-	while(##i<##n){
-		if(dllfunc("NEWCONTROL", "text", "Everything@history"+str(1+##i),"") == 0){
-			return false;
-		}
-		##i = ##i + 1;
-	}
-	return true;
-	
-InputFromText:
-	if(selecting){
-		$$search_words = gettext2(seltopcolumn,seltoplineno,selendcolumn,selendlineno,1);
-	}else{
-		##old_x=x;
-		##old_y=y;
-		selectline;
-		$$search_words = gettext2(seltopcolumn,seltoplineno,selendcolumn,selendlineno,0);
-		moveto  ##old_x, ##old_y;
-	}
-	return $$search_words;
-
-
-CheckEnvironment:
-	if(! existfile($g_exe)){
-		message "iniファイルで指定された実行ファイルが見つかりません。\n\n" +
-				"【見つからない実行ファイル名】\n"	+
-				$g_exe + "\n\n" 					+
-				"【iniファイル名】\n"				+
-				$g_ini_config_filename	+ "\n\n"	+
-				"【対応方法】\n"					+
-				"iniファイルに正しい実行ファイル名を設定して下さい。\n"
-				;
-
-		return false;
-	}
-	return true;
-
-
-UpdateSearchWindow:
-	if($g_search_pattern == ""){
-		call ClearText;
-	}else{
-		call RunEverything  $g_search_pattern;
-	}
 	return;
 
 
-ClearText:
-	disabledraw;
-	selectall;
-	backspace;
-	enabledraw;
-	return;
-
-
-GetSearchPath:
-	if(#g_path_mode==#g_PATH_MODE_NONE){
-		$$path_mode = "";
-	}else if(#g_path_mode==#g_PATH_MODE_CURRENT){
-		$$path_mode = $g_path_current;
-	}else if(#g_path_mode==#g_PATH_MODE_PROJECT){
-		$$path_mode = $g_path_project;
-	}else{
-		$$path_mode = "";
-	}
-	return $$path_mode;
-
-
-GetSearchPathModeString:
-	if(#g_path_mode==#g_PATH_MODE_NONE){
-		return "default";
-	}else if(#g_path_mode==#g_PATH_MODE_CURRENT){
-		return "current";
-	}else if(#g_path_mode==#g_PATH_MODE_PROJECT){
-		return "project";
-	}else{
-		return "";
-	}
-	return "";
-
-
+//#region Everything
 MakeEverythingArgument:
 	$$search_words = $$1;
 
@@ -763,6 +647,75 @@ RunEverything:
 	return result;
 
 
+//#region 初期化
+CheckEnvironment:
+	if(! existfile($g_exe)){
+		message "iniファイルで指定された実行ファイルが見つかりません。\n\n" +
+				"【見つからない実行ファイル名】\n"	+
+				$g_exe + "\n\n" 					+
+				"【iniファイル名】\n"				+
+				$g_ini_config_filename	+ "\n\n"	+
+				"【対応方法】\n"					+
+				"iniファイルに正しい実行ファイル名を設定して下さい。\n"
+				;
+
+		return false;
+	}
+	return true;
+
+LoadDengakuDll:
+	loaddll macrodir + "\\DengakuDLL.dll";
+	if (result) {
+		return true;
+	}
+	loaddll hidemarudir + "\\DengakuDLL.dll";
+	if (result) {
+		return true;
+	}
+	message "田楽DLLのロードに失敗しました\n" + "DengakuDLL.dllが秀丸マクロディレクトリに存在するか確認してください";
+	return false;
+
+LoadHmJReDll:
+	#g_hmjre_dll=loaddll(macrodir + "\\HmJre.dll");
+	if(#g_hmjre_dll){
+		return true;
+	}
+
+	#g_hmjre_dll=loaddll(hidemarudir + "\\HmJre.dll");
+	if(#g_hmjre_dll){
+		return true;
+	}
+	message "HmJre.dll のロードに失敗しました\n" +
+				+ "HmJre.dllが秀丸エディタのディレクトリに存在するか確認してください";
+		return false;
+	return false;
+
+//#region ファイル候補ウインドウ
+NewfileIfExist:
+	#g_open_newfile = false;
+	if(filetype=="new"){
+		return true;
+	}
+	//編集中のテキストを上書きしないための対応。
+	//新規ファイルを作成しそこへEverythingの結果を出力する。
+	newfile;
+	if(result==0){
+		return false;
+	}
+	#g_open_newfile=true;
+	#g_new_hidemaru=hidemaruhandle(0);
+	return true;
+
+CloseFileIfOpen:
+	if(#g_open_newfile){
+		setactivehidemaru	#g_old_hidemaru;
+		closehidemaruforced #g_new_hidemaru;
+
+		#g_old_hidemaru=0;
+		#g_new_hidemaru=0;
+	}
+	return true;
+
 HilightWorld:
 	$$search_words=$$1;
 	if(#g_search_mode==#g_SEARCH_DEFAULT){
@@ -775,7 +728,6 @@ HilightWorld:
 	hilightfound 1;
 	return;
 
-
 SearchWordsToRegex:
 	/*空白区切りの文字列を正規表現に変換する。
 	[in]	"hoge 123 .txt"
@@ -786,6 +738,58 @@ SearchWordsToRegex:
 	$$regex = dllfuncstr(#g_hmjre_dll,"ReplaceRegular", "[" + $g_space + "]+", $$escaped, 0, "|", 2);
 	return $$regex;
 
+UpdateSearchWindow:
+	if($g_search_pattern == ""){
+		call ClearText;
+	}else{
+		call RunEverything  $g_search_pattern;
+	}
+	return;
+
+ClearText:
+	disabledraw;
+	selectall;
+	backspace;
+	enabledraw;
+	return;
+	
+//#region iniファイル
+LoadIni:
+	$g_exe						= getinistr($g_ini_config_filename,"program","command"					);
+	$g_argument_default 		= getinistr($g_ini_config_filename,"program","argument_default" 		);
+	$g_argument_regex			= getinistr($g_ini_config_filename,"program","argument_regex"			);
+	$g_option_match_full_path	= getinistr($g_ini_config_filename,"program","option_match_full_path"	);
+	#g_match_full_path	=getininum( $g_ini_histry_filename, "setting", "match_full_path");
+	#g_search_mode		=getininum( $g_ini_histry_filename, "setting", "regex");
+	#g_path_mode		=getininum( $g_ini_histry_filename, "setting", "search_path");
+	return true;
+
+
+SanitizeIni:
+	//bool
+	if(#g_match_full_path!=0){
+		#g_match_full_path=1;
+	}
+	//bool
+	if(#g_search_mode!=0){
+		#g_search_mode=1;
+	}
+	if(#g_path_mode<0){
+		#g_path_mode=0;
+	}else if(#g_PATH_MODE_NUM <= #g_path_mode){
+		#g_path_mode=0;
+	}
+	return;
+
+
+WriteIni:
+	writeininum $g_ini_histry_filename, "setting", "match_full_path", #g_match_full_path;
+	writeininum $g_ini_histry_filename, "setting", "regex", #g_search_mode;
+	writeininum $g_ini_histry_filename, "setting", "search_path", #g_path_mode;
+	return ;
+
+
+//#region　その他
 TrimString:
 	while(1){
 	  ##word=strlen($$1);
@@ -798,20 +802,6 @@ TrimString:
 	  else break;
 	}
 	return $$1;
-
-ShowHelp:
-	message
-	"<F1>                 ヘルプ表示\n"+
-	"<Ctrl-r>             正規表現の切り替え（トグル）\n"+
-	"<Ctrl-f>,<Ctrl-b>    検索パス切り替え\n"+
-	"<Ctrl-d>             フルパス・ファイル名検索の切り替え（トグル）\n"+
-	"<Ctrl-n>,<Ctrl-p>    検索履歴を進める/戻す\n"+
-	"<Enter>              確定\n"+
-	"<ESC>,<Ctrl-c>       終了\n"
-	, "ヘルプ"
-	, 0x20;
-
-	return;
 
 
 /*****************************************************************************
@@ -832,7 +822,7 @@ IskeyDown:
 	return false;
 
 
-
+//#region 検索ヒストリ
 /*****************************************************************************
 	検索ヒストリ
 *****************************************************************************/
@@ -951,8 +941,20 @@ HistoryGetCurrentIndex:
 /*現在のヒストリインデックスを設定する
 */
 HistorySetCurrentIndex:
-	call _HistoryClipIndex ##1;
-	#g_history_current_index=##return;
+	if(#g_history_num==0){
+		//ヒストリが存在しない場合、とりあえず0を設定しておく。
+		#g_history_current_index=0;
+		return;
+	}
+	if(##1 < 0){
+		#g_history_current_index=0;
+		return ;
+	}
+	if(#g_history_num<=##1){
+		#g_history_current_index=#g_history_num-1;
+		return ;
+	}
+	#g_history_current_index=##1;
 	return ;
 
 
