@@ -6,42 +6,58 @@
 秀丸エディタでファイル検索を高速に行う目的で、ファイル検索ソフトの[Everything](http://www.voidtools.com/)を利用するマクロを書きました。<br>
 秀丸エディタから一瞬たりとも抜けたくない方向けのマクロです。
 
-### そもそもEverythingとは何？
+## そもそもEverythingとは何？
 
 [窓の杜の記事](https://forest.watch.impress.co.jp/docs/serial/winbasic2018/1125142.html)を参照して下さい。
 
-## 動作イメージ
+# 動作イメージ
+
+## ファイル検索→対象の決定→ファイルを開く
 
 ![動作イメージ](images/everything.gif "動作イメージ")
+
+## 検索対象のフォルダ切り替え
+
+![動作イメージ](images/everything_bf.gif "動作イメージ")
+
+## 正規表現
+![動作イメージ](images/everything_r.gif "動作イメージ")
+
+## 検索履歴
+
+![動作イメージ](images/everything_pn.gif "動作イメージ")
 
 
 # Everythingの導入方法
 
-## Everythingのインストール
+まずは、Everythingアプリを導入して利用できるようにします。
 
-### （ステップ1）
+その後で秀丸マクロを導入します。
+
+## ステップ 1/2
+
 まずは、[Everything本体](http://www.voidtools.com/)を公式サイトからダウンロードしてインストールして下さい。<br>
 インストール中のオプションは既定値で構いません。（後で設定することが出来ます）
 
-### （ステップ2）
+## ステップ 1/2
 
 `es.exe`のインストール方法<br>
 次に、[Everything](http://www.voidtools.com/)から`ES-バージョン番号.zip`をダウンロードします。<br>
 zipファイル中の`es.exe`をEverythingをインストールしたフォルダへコピーして下さい。<br>
 
-	 (例)
-	 C:\Program Files\Everything\es.exe
+     (例)
+     C:\Program Files\Everything\es.exe
 
 [最新版への直リン（2018年10月25日　現在）](https://www.voidtools.com/ES-1.1.0.10.zip)
 
 # 秀丸マクロの導入
 
-### （ステップ1）
+## ステップ 1/2
 
 全ファイルを秀丸エディタのマクロファイル用のフォルダにコピーしてください。<br>
 `everything.mac`マクロにキーを割り当ててご使用下さい。<br>
 
-## コピー後のフォルダ構成
+*コピー後のフォルダ構成*
 
     └─hidemaru-macro-folder
         └─everything
@@ -51,7 +67,7 @@ zipファイル中の`es.exe`をEverythingをインストールしたフォル�
                 ├─search_project_folder.mac
                 └─search_project_folder.mac.config.ini
 
-### （ステップ2）
+## ステップ 1/2
 
 [でんがくDLL](http://www.ceres.dti.ne.jp/~sugiura/)を秀丸エディタにインストールして下さい。<br>
 ダイアログを表示するために必要なDLLです。
@@ -60,7 +76,6 @@ zipファイル中の`es.exe`をEverythingをインストールしたフォル�
 
 |ショートカットキー|機能|
 |:---|:---|
-|F1|ヘルプ表示|
 |Ctrl-b,Ctrl+f|検索パス（通常、プロジェクトフォルダ、カレントフォルダ）の切り替え|
 |Ctrl-r|「通常の検索モード、正規表現」の切り替え|
 |Ctrl-d|フルパス、ファイル名検索の切り替え|
@@ -68,7 +83,8 @@ zipファイル中の`es.exe`をEverythingをインストールしたフォル�
 |Ctrl-1 ～ Ctrl-9|検索履歴を選択します|
 |Ctrl-s,Alt-s|検索ボックスに入力フォーカスを移動する|
 |Ctrl-c,esc|キャンセルして終了|
-|enter|確定して終了|
+|ctrl-m,enter|確定して終了|
+|F1|ヘルプ表示|
 
 操作方法はVIMの[ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)と概ね同じです。
 
@@ -115,13 +131,14 @@ masterブランチを取得しても多分動作しないです。<br>
 
 # 更新履歴
 
-## ????/??/?? ver ?.?.?
+## 2019/02/09 ver 2.1.0
 
-- ショートカットの操作方法をわかりやすくする目的でGUIのレイアウトを変更しました。
-	- このマクロを久しぶりに利用するとショートカットキーが分からず思ったとおりに操作できないのが理由です。
+- 検索に集中できるようにGUIのレイアウトを変更しました😘
+	- 機能名とショートカット名を全てGUIに表示しました。
 - キーボードショートカットの追加
-	- 「Alt-Sキー・Ctrl-Sキー」で検索ボックスに移動できるようにしました。
 	- Ctrl-1～Ctrl-9キーで検索履歴を選択できるようにしました。
+	- Ctrl-mをエンターキーとして認識するようにしました。
+	- 「Alt-Sキー・Ctrl-Sキー」でキーボードフォーカスを検索ボックスに移動できるようにしました。
 
 ## 2019/01/20 ver 2.0.4
 
@@ -171,7 +188,7 @@ v2.0.2の対応が不十分でした、更に修正しました。
 
 - Windows 10 64bit
 - 秀丸エディタ ver 8.83 64bit
-- でんがくDLL Ver.3.20 64bit
+- [田楽DLL Ver.3.20 64bit](http://www.ceres.dti.ne.jp/~sugiura/)
 - [Everything ver 1.4.1895(x64)](http://www.voidtools.com/)
 - [ES.exe ver 1.1.0.10](http://www.voidtools.com/)
 
