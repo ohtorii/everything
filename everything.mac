@@ -1,20 +1,5 @@
 ﻿/* 秀丸エディタからEverythingを使用するマクロ。
 
-＊操作方法
-・<f1>          ヘルプ表示
-・<c-r>         「通常の検索モード、正規表現」の切り替え
-・<c-f>,<c-b>   検索パス切り替え（通常、プロジェクトディレクトリ、カレントディレクトリ）
-・<c-d>         フルパス検索モードとファイル名のみの検索モードを切り替え
-・<c-p>,<c-n>   検索履歴を辿る
-・<esc>,<c-c>   キャンセルして終了
-・<enter>       確定して終了
-
-VIMのctrlp.vimと概ね同じです。
-
-＊動作確認を行った環境
-・秀丸エディタ ver 8.83 64bit
-・でんがくDLL Ver.3.20
-
 *連絡先
 https://github.com/ohtorii/everything
 http://d.hatena.ne.jp/ohtorii/
@@ -23,7 +8,7 @@ https://twitter.com/ohtorii
 ＊ライセンス
 MIT License
 
-Copyright (c) 2018 ohtorii
+Copyright (c) 2019 ohtorii
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -260,8 +245,13 @@ MainLoop:
 			//<c-c>
 			call IskeyDown 0x43;
 			if(##return){
-				$$item="0";
-				break;
+				return "0";
+			}
+			
+			//<c-m> //Enter
+			call IskeyDown 0x4d;
+			if(##return){
+				return "1";
 			}
 
 			//<c-r>
