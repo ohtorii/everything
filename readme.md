@@ -1,6 +1,12 @@
 ﻿秀丸エディタからEverythingを使用する秀丸マクロ
 ========
 
+
+![GitHub release](https://img.shields.io/github/release/ohtorii/everything.svg)
+![Maintenance](https://img.shields.io/maintenance/yes/2020.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
 # はじめに
 
 ファイルを探す時間を大きく削減するために、<br>
