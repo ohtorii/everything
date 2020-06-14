@@ -1,7 +1,7 @@
 ﻿/*プロジェクトフォルダを探す
 
 （利用例）
-execmacro "search_project_folder.mac" "c:\\my_project\\src\system\\heap";
+execmacro "search_project_folder.mac", "c:\\my_project\\src\system\\heap";
 
 （マクロの返値）
 プロジェクトルートのフォルダを見つけるとその文字列を返します、
@@ -42,7 +42,6 @@ $g_markers[0] = "";
 #g_markers_len=0;
 
 $g_ini_config_filename=currentmacrofilename+".config.ini";
-#g_dll 	= 0;
 
 
 debuginfo 0;
@@ -51,27 +50,19 @@ endmacro $$return;
 
 
 main:
+	$$current_folder=getarg(0);
+	debuginfo "main:$$current_folder="+$$current_folder;
+
 	if(! existfile($g_ini_config_filename)){
 		message "iniファイルが見つからない\n"+$g_ini_config_filename;
 		return false;
 	}
-	#g_dll=loaddll(hidemarudir+"\\ht_tools.dll");
-	if(#g_dll==0){
-		message "ht_tools.dll のロードに失敗しました\n" +
-				"ht_tools.dll が秀丸エディタのディレクトリに存在するか確認してください";
-		return false;
-	}
-	
-	$$current_folder=getarg(0);
-	call start;
-	$$ret=$$return;
-
-	freedll(#g_dll);
-	#g_dll=0;
-	return $$ret;
+	call start $$current_folder;
+	return $$return;
 
 
 start:
+	$$current_folder=$$1;
 	call load_ini;
 	if(! ##return){
 		return "";
@@ -85,7 +76,7 @@ start:
 
 findroot:
 	$$current_folder=$$1;
-	debuginfo "$$current_folder="+$$current_folder;
+	debuginfo "findroot:$$current_folder="+$$current_folder;
 
 	##i=0;
 	while(##i < #g_markers_len){
@@ -107,8 +98,16 @@ findroot:
 
 
 getparent:
-	$$parent = dllfuncstr(#g_dll, "GetParentFolder", $$1);
-	return $$parent;
+	##index_en	 =wcsstrrstr($$1,"\\");
+	##index_slash=wcsstrrstr($$1,"/");
+	if(##index_slash < ##index_en){
+		return wcsleftstr($$1,##index_en);
+	}
+	if(##index_slash <= 0){
+		return "";
+	}
+	return wcsleftstr($$1,##index_slash);
+
 
 load_ini:
 	##i=0;
@@ -120,7 +119,7 @@ load_ini:
 		}
 		$g_markers[##i]=$$item;
 		#g_markers_len = #g_markers_len + 1;
-		
+
 		##i = ##i + 1;
 	}
 	return false;
