@@ -44,7 +44,7 @@ $g_version 		= "version 2.1.0";
 
 //検索するファイルパス
 $g_path_current=directory2;
-execmacro currentmacrodirectory+"\\everything_internal\\search_project_folder.mac", filename2;
+execmacro currentmacrodirectory+"\\everything_internal\\search_repository_folder.mac", filename2;
 $g_path_project=getresultex(-1);
 
 //空白文字の定義
@@ -185,7 +185,7 @@ Start:
 	debuginfo 0;
 	call MainLoop;
 	$$item=$$return;
-	
+
 	##n = dllfunc("ENDDIALOG");
 
 	if($$item=="0"){
@@ -247,7 +247,7 @@ MainLoop:
 			if(##return){
 				return "0";
 			}
-			
+
 			//<c-m> //Enter
 			call IskeyDown 0x4d;
 			if(##return){
@@ -262,20 +262,20 @@ MainLoop:
 				call UpdateSearchWindow;
 				continue;
 			}
-			
+
 			//<c-s>
 			call IskeyDown 0x53;
 			if(##return){
 				##n = dllfunc("SETFOCUSEDCTRL","Everything@Param");
 				continue;
 			}
-			
+
 			//<c-1> ~ <c-9>
 			call MainLoop_Histroy;
 			if(##return){
 				continue;
 			}
-			
+
 			//<c-d>
 			call IskeyDown 0x44;
 			if(##return){
@@ -330,12 +330,12 @@ MainLoop:
 		}
 	}
 	return $$item;
-	
+
 
 MainLoop_Histroy:
 	call CalcHistroyShortcutNum;
 	##n=##return;
-	
+
 	##key_1=0x31;
 	##histrory_index=0;
 	while(##histrory_index<##n){
@@ -445,12 +445,12 @@ CreateDialogMain:
 		dllfunc("NEWCONTROL", "edit", "Everything@Param", "") == 0			||
 		/*空行*/
 		dllfunc("NEWCONTROL", "text", "", "") == 0							||
-		
+
 		dllfunc("NEWCONTROL", "text", "Everything@folder",	"") == 0		||
 		dllfunc("NEWCONTROL", "text", "Everything@regex",	"") == 0		||
 		dllfunc("NEWCONTROL", "text", "Everything@filter",	"") == 0		||
 		/*空行*/
-		dllfunc("NEWCONTROL", "text", "", "") == 0							
+		dllfunc("NEWCONTROL", "text", "", "") == 0
 	){
 		return false;
 	}
@@ -460,14 +460,14 @@ CreateDialogMain:
 	}
 	if(	/*空行*/
 		dllfunc("NEWCONTROL", "text", "", "") == 0							||
-		
+
 		dllfunc("NEWCONTROL", "button", "Everything@Help", "?") == 0		||
 		dllfunc("SETCTRLWIDTH", "", 8) == 0 								||
 		dllfunc("SETCTRLNOTIFY","",$g_NOTIFY_HELP) == 0
 	){
 		return false;
 	}
-	
+
 	call UpdateDialogStatus;
 	// ダイアログの表示
 	##n = dllfunc("SHOWDIALOG", hidemaruhandle(0), 0);
@@ -526,7 +526,7 @@ UpdateHistoryGui:
 	*/
 	call HistoryGetCurrentIndex;
 	##current_index = ##return;
-	
+
 	##i		= 0;
 	while(##i<#g_MAX_HISTORY_NUM){
 		if(##i==0){
@@ -546,7 +546,7 @@ UpdateHistoryGui:
 		##i = ##i + 1;
 	}
 	return ;
-	
+
 
 ShowHelp:
 	message
@@ -742,7 +742,7 @@ ClearText:
 	backspace;
 	enabledraw;
 	return;
-	
+
 //#region iniファイル
 LoadIni:
 	$g_exe						= getinistr($g_ini_config_filename,"program","command"					);
@@ -927,7 +927,7 @@ HistoryGet:
 */
 HistoryGetCurrentIndex:
 	return #g_history_current_index;
-	
+
 /*現在のヒストリインデックスを設定する
 */
 HistorySetCurrentIndex:

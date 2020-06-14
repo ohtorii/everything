@@ -1,4 +1,4 @@
-﻿/*プロジェクトフォルダを探す
+﻿/*リポジトリのフォルダを探す
 
 （利用例）
 execmacro "search_project_folder.mac", "c:\\my_project\\src\system\\heap";
@@ -112,7 +112,7 @@ getparent:
 load_ini:
 	##i=0;
 	while(##i<100){
-		$$item = getinistr($g_ini_config_filename,"project_folder","_"+str(##i));
+		$$item = getinistr($g_ini_config_filename,"repository_folder","_"+str(##i));
 		debuginfo "$$item="+$$item;
 		if($$item==""){
 			return true;
