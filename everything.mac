@@ -746,6 +746,9 @@ ClearText:
 //#region iniファイル
 LoadIni:
 	$g_exe						= getinistr($g_ini_config_filename,"program","command"					);
+	execmacro currentmacrodirectory+@"\everything_internal\expand_environment_strings.mac", $g_exe;
+	$g_exe = getresultex(-1);
+
 	$g_argument_default 		= getinistr($g_ini_config_filename,"program","argument_default" 		);
 	$g_argument_regex			= getinistr($g_ini_config_filename,"program","argument_regex"			);
 	$g_option_match_full_path	= getinistr($g_ini_config_filename,"program","option_match_full_path"	);
