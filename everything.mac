@@ -688,7 +688,8 @@ NewfileIfExist:
 	    return ##return;
 	}
 	if(filetype!="new"){
-        return true;
+        call NewHidemaru;
+	    return ##return;
     }
     //以下、新規ファイルの場合
     if(charcount(0)==0){
