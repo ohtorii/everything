@@ -683,10 +683,22 @@ LoadHmJReDll:
 //#region ファイル候補ウインドウ
 NewfileIfExist:
 	#g_open_newfile = false;
-	if(filetype=="new"){
-		return true;
+	if(readonly){
+    	call NewHidemaru;
+	    return ##return;
 	}
-	//編集中のテキストを上書きしないための対応。
+	if(filetype!="new"){
+        return true;
+    }
+    //以下、新規ファイルの場合
+    if(charcount(0)==0){
+        return true;
+    }
+	call NewHidemaru;
+	return ##return;
+
+NewHidemaru:
+    //編集中のテキストを上書きしないための対応。
 	//新規ファイルを作成しそこへEverythingの結果を出力する。
 	newfile;
 	if(result==0){
